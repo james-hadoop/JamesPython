@@ -95,7 +95,7 @@ def showCluster(centroidList, clusterDict):
 
 if __name__ == '__main__':
 
-    inFile = "/Users/qjiang/Desktop/20171218/AutoEventsFieldsVector_clear2.csv"            # 数据集文件
+    inFile = "/Users/qjiang/workspace4python/JamesPython/AutoEventsFieldsVector_clear2.csv"            # 数据集文件
     dataSet = loadDataSet(inFile)                      # 载入数据集
     centroidList = initCentroids(dataSet, 4)           # 初始化质心，设置k=4
     clusterDict = minDistance(dataSet, centroidList)   # 第一次聚类迭代
