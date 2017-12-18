@@ -94,7 +94,7 @@ else:
 
 # loop
 for x in range(0, 10):
-    print(x, ' ', end="")
+    print(x, ' ')
 print('\n')
 
 for y in grocery_list:
@@ -157,7 +157,7 @@ print(quote_list)
 test_file = open("test.txt", "wb")
 print(test_file.mode)
 print(test_file.name)
-test_file.write(bytes("Write me to the file\n", 'UTF-8'))
+test_file.write("Write me to the file\n")
 test_file.close()
 
 test_file = open("test.txt", "r+")
