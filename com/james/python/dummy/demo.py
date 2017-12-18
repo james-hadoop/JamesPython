@@ -95,6 +95,7 @@ else:
 # loop
 for x in range(0, 10):
     print(x, ' ')
+
 print('\n')
 
 for y in grocery_list:
