@@ -1,0 +1,5 @@
+2019-10-13 14:41:23 logging_demo.py [line:9] DEBUG: debug
+2019-10-13 14:41:23 logging_demo.py [line:10] INFO: info
+2019-10-13 14:41:23 logging_demo.py [line:11] WARNING: warning
+2019-10-13 14:41:23 logging_demo.py [line:12] ERROR: error
+2019-10-13 14:41:23 logging_demo.py [line:13] CRITICAL: critical
