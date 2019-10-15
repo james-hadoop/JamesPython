@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 # 第三方 SMTP 服务
 mail_host = "smtp.163.com"
 mail_user = "jamesqjiang"
-mail_pass = "jamesqjiang"
+mail_pass = "jamesqjiang123"
 
 sender = 'jamesqjiang@163.com'
 receivers = ['jamesqjiang@163.com']
