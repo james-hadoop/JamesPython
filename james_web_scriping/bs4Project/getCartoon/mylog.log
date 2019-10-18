@@ -1,0 +1,10 @@
+2019-10-16 08:58:48,656 DEBUG    qjiang     I'm debug 测试中文
+
+2019-10-16 08:58:48,656 INFO     qjiang     I'm info    
+
+2019-10-16 08:58:48,656 WARNING  qjiang     I'm warn    
+
+2019-10-16 08:58:48,656 ERROR    qjiang     I'm error 测试中文
+
+2019-10-16 08:58:48,656 CRITICAL qjiang     I'm critical
+
