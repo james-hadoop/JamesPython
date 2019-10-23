@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-unrate = pd.read_csv('/Users/qjiang/workspace4python/JamesPython/james_pandas/puin_top100_input.csv')
+unrate = pd.read_csv('../_data/account_top200.csv')
 unrate = unrate[unrate.puin.isin(['2713129639'])]
 
 fig = plt.figure(figsize=(10, 6))
