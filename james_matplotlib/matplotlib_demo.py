@@ -1,0 +1,15 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('/Users/qjiang/workspace4python/JamesPython/james_pandas/puin_top100_input.csv')
+
+data = df[df.puin.isin(['2713129639'])]
+data = data.sort_values(axis=0, by='input_date', ascending=True)
+
+print(data)
+plt.plot(data['input_date'],  data['cnt'])
+plt.xticks(rotation=60)
+plt.ylabel('content count')
+plt.xlabel('date')
+plt.title('title')
+plt.show()

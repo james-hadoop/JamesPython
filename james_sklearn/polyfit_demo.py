@@ -13,7 +13,7 @@ pd.set_option('display.max_colwidth', 1000)
 
 pd.set_option('display.max_rows', None)
 
-df = pd.read_csv('/Users/qjiang/workspace4python/JamesPython/james_pandas/2.csv')
+df = pd.read_csv('../_data/2.csv')
 
 X = np.array(df['input_date'])
 X = X.tolist()

@@ -8,7 +8,7 @@ pd.set_option('display.max_colwidth', 1000)
 
 pd.set_option('display.max_rows', None)
 
-df = pd.read_csv('puin_top100_input.csv')
+df = pd.read_csv('../_data/account_top200.csv')
 
 print(df.weekofyear.describe())
 

@@ -8,7 +8,7 @@ pd.set_option('display.max_colwidth', 1000)
 
 pd.set_option('display.max_rows', None)
 
-df = pd.read_csv('puin_top100_input.csv')
+df = pd.read_csv('../_data/account_top200.csv')
 
 # df = df[df.puin.isin(['2713129639', '2269829235', '1685161793', '1685161748'])]
 
@@ -25,7 +25,7 @@ data = data[data['input_date'] < 20191010]
 
 data = data[['input_date', 'cnt']]
 
-data.to_csv('2.csv')
+data.to_csv('../_data/2.csv')
 
 # print(data.cnt.describe())
 #
