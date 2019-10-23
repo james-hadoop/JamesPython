@@ -23,6 +23,9 @@ print(data)
 # print(data['cnt'].describe())
 
 sns.boxplot(x='input_week_day', y='cnt', data=data)
+sns.set(color_codes=True)
+sns.stripplot(x='input_week_day', y='cnt', data=data)
+# sns.distplot(data['cnt'], kde=True)
 plt.show()
 
 data = data[data['input_week_day'] == 1]
