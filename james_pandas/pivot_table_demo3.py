@@ -17,28 +17,32 @@ data = df[['s_input_date', 'week_of_year', 'input_week_day', 'cnt']]
 
 ret = data.groupby(['week_of_year', 'input_week_day']).cnt.agg('sum')
 
-ret = ret[3:]
+ret = ret[2:-2]
 ret = ret.rename(columns={'week_of_year', 'input_week_day', 'cnt'})
 # ret.columns = ['week_of_year', 'input_week_day', 'cnt']
 ret.to_csv('../_data/ret.csv')
 # print(ret)
 
 fig = plt.figure(figsize=(10, 6))
-colors = ['red', 'blue', 'green', 'orange', 'black', 'red', 'blue', 'green', 'orange']
+colors = ['red', 'blue', 'green', 'orange', 'black', 'cyan', 'darkgreen', 'darkred', 'gold']
 
 df = pd.read_csv('../_data/ret.csv')
 # print(df)
 df.columns = ['week_of_year', 'input_week_day', 'cnt']
-# print(df)
+df.sort_values(axis=0, by=['week_of_year', 'input_week_day'], ascending=True)
+print(df)
 
 for i in range(9):
+    print(i)
+    print(colors[i])
     start_index = i * 7
-    end_index = i * 7 + 7
+    end_index = i * 7 + 6
     subset = df[start_index:end_index]
     print(subset)
     print('-' * 60)
     label = str(i)
     plt.plot(subset['input_week_day'], subset['cnt'], c=colors[i], label=label)
 
-plt.legend(loc='best')
+plt.legend(loc='upper right')
 plt.show()
+s
