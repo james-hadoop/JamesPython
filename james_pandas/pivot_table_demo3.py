@@ -20,14 +20,12 @@ data = data[data['week_of_year'] < 43]
 ret = data.groupby(['week_of_year', 'input_week_day']).cnt.agg('sum')
 ret.columns = ['week_of_year', 'input_week_day', 'cnt']
 ret.to_csv('../_data/ret.csv')
-print(ret)
+# print(ret)
 
 fig = plt.figure(figsize=(10, 6))
 colors = ['red', 'blue', 'green', 'orange', 'black', 'cyan', 'darkgreen', 'darkred', 'gold']
 
 df = pd.read_csv('../_data/ret.csv', header=None)
-df.columns = ['week_of_year', 'input_week_day', 'cnt']
-print(df)
 df.columns = ['week_of_year', 'input_week_day', 'cnt']
 df.sort_values(axis=0, by=['week_of_year', 'input_week_day'], ascending=True)
 # print(df)
