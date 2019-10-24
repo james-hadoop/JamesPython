@@ -11,13 +11,13 @@ pd.set_option('display.max_rows', None)
 
 df = pd.read_csv('../_data/account_top200.csv')
 
-df = df[df.puin.isin(['2713129639'])]
+df = df[df.puin.isin(['1781807016'])]
 
 data = df[['s_input_date', 'week_of_year', 'input_week_day', 'cnt']]
 data = data[data['week_of_year'] > 33]
 data = data[data['week_of_year'] < 43]
 
-ret = data.groupby(['input_week_day']).cnt.agg('sum')
+ret = data.groupby(['input_week_day']).cnt.mean()
 ret.columns = ['input_week_day', 'cnt']
 ret.to_csv('../_data/input_week_day_sum.csv')
 print(ret)
