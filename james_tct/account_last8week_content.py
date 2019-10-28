@@ -9,13 +9,13 @@ pd.set_option('display.max_colwidth', 1000)
 
 pd.set_option('display.max_rows', None)
 
-df = pd.read_csv('../_data/account_top200.csv')
+df = pd.read_csv('../_data/20191027/content_20191027_top200.csv')
 
-df = df[df.puin.isin(['1781806734'])]
+df = df[df.puin.isin(['2713129639'])]
 
 data = df[['s_input_date', 'week_of_year', 'input_week_day', 'cnt']]
 data = data[data['week_of_year'] > 35]
-data = data[data['week_of_year'] < 43]
+data = data[data['week_of_year'] < 44]
 
 ret = data.groupby(['week_of_year', 'input_week_day']).cnt.mean()
 ret.columns = ['week_of_year', 'input_week_day', 'cnt']
@@ -39,7 +39,7 @@ for i in range(8):
     print('-' * 60)
     print(subset)
     print('-' * 60)
-    print('\n')
+    print('')
     label = 'week ' + str(35 + i + 1)
     plt.plot(subset['input_week_day'], subset['cnt'], c=colors[i], label=label)
 

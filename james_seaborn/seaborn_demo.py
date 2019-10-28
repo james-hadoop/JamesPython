@@ -13,7 +13,7 @@ pd.set_option('display.max_rows', None)
 df = pd.read_csv('../_data/account_top200.csv')
 # print(df)
 
-df = df[df.puin.isin(['2713129639'])]
+df = df[df.puin.isin(['1781806734'])]
 df = df[df['week_of_year'] > 33]
 df = df[df['week_of_year'] < 43]
 df = df.sort_values(axis=0, by=['week_of_year', 'input_week_day'], ascending=True)
