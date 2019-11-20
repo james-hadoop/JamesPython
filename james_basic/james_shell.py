@@ -17,24 +17,35 @@ browser.get(url)
 source = browser.page_source
 time.sleep(1)
 
-target = browser.find_element_by_xpath(
-    "/html/body/div[2]/table/tbody/tr/td[3]/table/tbody/tr/td/div/table/tbody/tr/td/table[1]/tbody/tr[7]/td[1]/a[2]")
-target_url = target.get_attribute('href')
-
-print(">>>")
-print(browser.current_url)
-print(target.text)
-print(target_url)
-
-target.click()
-
-print(">>>")
-print(browser.current_url)
-
-browser.get(browser.current_url)
+browser = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
+browser.get(url)
 source = browser.page_source
-time.sleep(1)
+time.sleep(3)
 
-cont=browser.find_element_by_xpath("/html/body/div[3]/div[2]/table/tbody/tr/td/div")
+# target = browser.find_element_by_xpath(
+#     "/html/body/div[2]/table/tbody/tr/td[3]/table/tbody/tr/td/div/table/tbody/tr/td/table[1]/tbody/tr[7]/td[1]/a[2]")
+targets=browser.find_elements_by_xpath("//tr[@class='tr_main_value_odd']")
 print(">>>")
-print(cont)
+i=0
+for t in targets:
+    print(i)
+    i+=1
+print(targets)
+
+target=browser.find_element_by_xpath("//tr[@class='tr_main_value_odd']/td[1]/a")
+
+
+title = target.get_attribute('title')
+url = target.get_attribute('href')
+pub_time=browser.find_element_by_xpath("//tr[@class='tr_main_value_odd']/td[3]").text
+pub_org=browser.find_element_by_xpath("//tr[@class='tr_main_value_odd']/td[2]").text
+doc_id=''
+index_id=''
+key_cnt=''
+cont=''
+
+print(">>>")
+print(title)
+print(url)
+print(pub_time)
+print(pub_org)
