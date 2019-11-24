@@ -1,0 +1,4 @@
+2019-11-24 19:41:23,799 ERROR    james      I'm error   
+2019-11-24 19:41:23,799 CRITICAL james      I'm critical
+2019-11-24 19:41:32,272 ERROR    james      I'm error   
+2019-11-24 19:41:32,272 CRITICAL james      I'm critical
