@@ -22,4 +22,5 @@ df = df[df.puin.isin(['1781806734'])]
 
 # print(df.groupby(['puin', 'input_week_day']).cnt.describe())
 
+
 print(df.groupby(['puin', 'input_date']).cnt.agg('sum'))

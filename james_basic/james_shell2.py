@@ -74,8 +74,8 @@ getDbConnection()
 
 cursor = conn.cursor()
 
-browser = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
-browser2 = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
+browser = webdriver.Chrome(executable_path=r"/Users/qjiang/_AllDocMap/06_Software/install/chromedriver")
+browser2 = webdriver.Chrome(executable_path=r"/Users/qjiang/_AllDocMap/06_Software/install/chromedriver")
 browser.get(url)
 source = browser.page_source
 time.sleep(1)
@@ -88,7 +88,7 @@ for t in targets:
     url = t.find_element_by_xpath("./td[1]/a").get_attribute('href')
     pub_time = t.find_element_by_xpath("./td[3]").text
     pub_org = t.find_element_by_xpath("./td[2]").text
-    region = str('上海')
+    region = str('杭州')
     update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     t.click()
@@ -99,8 +99,6 @@ for t in targets:
     doc_id = browser2.find_element_by_xpath("/html/body/div[3]/table[2]/tbody/tr[2]/td[2]").text
     index_id = browser2.find_element_by_xpath("/html/body/div[3]/table[2]/tbody/tr[1]/td[2]").text
     cont = browser2.find_element_by_xpath("//td[@class='bt_content']").text
-
-    region=''
 
     key_cnt = 0
     for key in keys:

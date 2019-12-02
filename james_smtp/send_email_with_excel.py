@@ -7,18 +7,19 @@ from email.mime.text import MIMEText
 # 第三方 SMTP 服务
 mail_host = "smtp.163.com"
 mail_user = "jamesqjiang"
-mail_pass = "jamesqjiang"
+mail_pass = "jamesqjiang123"
 
 sender = 'jamesqjiang@163.com'
 receivers = ['jamesqjiang@163.com']
+# receivers = ['sysinfo@yuanqucha.com']
 
 content = '我用Python'
 title = 'send_email_with_excel'
-csv_file_path = "/home/james/桌面/_CURRENT_WORK/_爬虫数据/shenzhen_201911202222.csv"
-csv_file_name = "shenzhen_201911202222.csv"
+csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20191202.csv"
+csv_file_name = "yqc_spider_20191202.csv"
 
 msg = MIMEMultipart()
-msg.attach(MIMEText("send_email_with_excel"))
+msg.attach(MIMEText(csv_file_name))
 msg['Subject'] = Header(title, 'utf-8')  # subject
 # msg['From'] = sender
 # msg['To'] = receivers
