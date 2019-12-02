@@ -1,10 +1,10 @@
 import smtplib
 
 HOST = 'smtp@163.com'
-SUBJECT = 'James SMTP Demo'
-TO = 'jamesqjiang@163.com'
+SUBJECT = u'测试'
+TO = 'sysinfo@yuanqucha.com'
 FROM = 'jamesqjiang@163.com'
-text = 'Python rules them all!'
+text = u'测试邮件'
 BODY = "\r\n".join((
     "From: %s" % FROM,
     "To: %s" % TO,
