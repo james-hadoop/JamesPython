@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 from selenium import webdriver
 import pymysql
 
@@ -53,7 +54,7 @@ keys = ['创新',
 url = "http://www.hangzhou.gov.cn/col/col1346101/"
 
 _sql = """
-    insert into yqc_hangzhou(id, title, url, pub_time, pub_org, doc_id, index_id, key_cnt, cont) values (null, %s, %s, %s, %s, %s, %s, %s, %s)
+    insert into yqc_spider(id, title, url, pub_time, pub_org, doc_id, index_id, key_cnt, region, update_time, cont) values (null, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
       """
 
 
@@ -87,6 +88,8 @@ for t in targets:
     url = t.find_element_by_xpath("./td[1]/a").get_attribute('href')
     pub_time = t.find_element_by_xpath("./td[3]").text
     pub_org = t.find_element_by_xpath("./td[2]").text
+    region = str('上海')
+    update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     t.click()
 
@@ -96,6 +99,8 @@ for t in targets:
     doc_id = browser2.find_element_by_xpath("/html/body/div[3]/table[2]/tbody/tr[2]/td[2]").text
     index_id = browser2.find_element_by_xpath("/html/body/div[3]/table[2]/tbody/tr[1]/td[2]").text
     cont = browser2.find_element_by_xpath("//td[@class='bt_content']").text
+
+    region=''
 
     key_cnt = 0
     for key in keys:
@@ -112,8 +117,7 @@ for t in targets:
         print(index_id)
         print(key_cnt)
         cursor.execute(_sql, (
-            title, url, pub_time, pub_org, doc_id, index_id,
-            key_cnt, cont))
+            title, url, pub_time, pub_org, doc_id, index_id, key_cnt, region, update_time, cont))
 
         conn.commit()
     i += 1
