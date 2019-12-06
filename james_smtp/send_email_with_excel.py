@@ -10,8 +10,8 @@ mail_user = "jamesqjiang"
 mail_pass = "jamesqjiang123"
 
 sender = 'jamesqjiang@163.com'
-receivers = ['jamesqjiang@163.com']
-# receivers = ['sysinfo@yuanqucha.com']
+# receivers = ['jamesqjiang@163.com']
+receivers = ['sysinfo@yuanqucha.com']
 
 content = '我用Python'
 title = 'send_email_with_excel'
