@@ -76,10 +76,10 @@ sender = 'jamesqjiang@163.com'
 ######################设置接收人#######################
 # receiver1 = 'defa.lai@cgtz.com'
 # receiver2 = '1973536419@qq.com'
-receiver3 = 'jamesqjiang@163.com'
+receiver3 = 'sysinfo@yuanqucha.com'
 
 #####################设置主题#######################
-subject = '别走，我给你看个宝贝'
+subject = '测试邮件'
 
 #################设置发送内容:1：发送html表格数据########################
 data = get_data()

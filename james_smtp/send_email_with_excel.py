@@ -7,22 +7,21 @@ from email.mime.text import MIMEText
 # 第三方 SMTP 服务
 mail_host = "smtp.163.com"
 mail_user = "jamesqjiang"
-mail_pass = "jamesqjiang123"
+mail_pass = "jamesqjiang"
 
 sender = 'jamesqjiang@163.com'
-# receivers = ['jamesqjiang@163.com']
 receivers = ['sysinfo@yuanqucha.com']
 
-content = '我用Python'
-title = 'send_email_with_excel'
-csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20191202.csv"
-csv_file_name = "yqc_spider_20191202.csv"
+content = u'请查收最新的园区政策信息'
+title = '园区政策信息_20191202'
+csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_201912092242.csv"
+csv_file_name = "yqc_spider_201912092242.csv"
 
 msg = MIMEMultipart()
-msg.attach(MIMEText(csv_file_name))
-msg['Subject'] = Header(title, 'utf-8')  # subject
-# msg['From'] = sender
-# msg['To'] = receivers
+msg.attach(MIMEText('尊敬的先生/女士：  请查收最新的园区政策信息，感谢您的订阅！'))
+msg['Subject'] = title  # subject
+msg['From'] = 'jamesqjiang@163.com'
+msg['To'] = 'sysinfo@yuanqucha.com'
 
 xlsx = MIMEText(open(csv_file_path, 'rb').read(), 'base64', 'utf-8')
 xlsx["Content-Type"] = 'application/octet-stream'
