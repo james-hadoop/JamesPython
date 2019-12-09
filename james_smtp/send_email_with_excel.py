@@ -14,14 +14,15 @@ receivers = ['sysinfo@yuanqucha.com']
 
 content = u'请查收最新的园区政策信息'
 title = '园区政策信息_20191202'
-csv_file_path = "/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_201912092208.csv"
-csv_file_name = "yqc_spider_201912092208.csv"
+
+csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_201912092242.csv"
+csv_file_name = "yqc_spider_201912092242.csv"
 
 msg = MIMEMultipart()
 msg.attach(MIMEText('尊敬的先生/女士：  请查收最新的园区政策信息，感谢您的订阅！'))
 msg['Subject'] = title  # subject
-msg['From'] = '<jamesqjiang@163.com>'
-msg['To'] = '<sysinfo@yuanqucha.com>'
+msg['From'] = 'jamesqjiang@163.com'
+msg['To'] = 'sysinfo@yuanqucha.com'
 
 xlsx = MIMEText(open(csv_file_path, 'rb').read(), 'base64', 'gb2312')
 xlsx["Content-Type"] = 'application/octet-stream'
