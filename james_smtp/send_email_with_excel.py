@@ -42,3 +42,5 @@ smtpObj = smtplib.SMTP_SSL(mail_host, 465)  # 启用SSL发信, 端口一般是46
 smtpObj.login(mail_user, mail_pass)  # 登录验证
 smtpObj.sendmail(sender, receivers, msg.as_string())  # 发送
 print("mail has been send successfully.")
+
+
