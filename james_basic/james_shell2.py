@@ -54,7 +54,7 @@ keys = ['创新',
 url = "http://www.hangzhou.gov.cn/col/col1346101/"
 
 _sql = """
-    insert into yqc_spider(id, title, url, pub_time, pub_org, doc_id, index_id, key_cnt, region, update_time, cont) values (null, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    insert into yqc_spider_hangzhou(id, title, url, pub_time, pub_org, doc_id, index_id, key_cnt, region, update_time, cont) values (null, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
       """
 
 
@@ -74,16 +74,16 @@ getDbConnection()
 
 cursor = conn.cursor()
 
-# browser = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
-# browser2 = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
-browser = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
-browser2 = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
+browser = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
+browser2 = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
+# browser = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
+# browser2 = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
 
 browser.get(url)
 source = browser.page_source
 time.sleep(1)
 
-targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_even']")
+targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_odd']")
 print(">>>")
 i = 0
 for t in targets:
@@ -92,7 +92,7 @@ for t in targets:
     pub_time = t.find_element_by_xpath("./td[3]").text
     pub_org = t.find_element_by_xpath("./td[2]").text
     region = str('杭州')
-    update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    update_time = datetime.datetime.now().strftime("%Y-%m-%d 00:00:00")
 
     t.click()
 
