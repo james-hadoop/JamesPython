@@ -93,4 +93,4 @@ print('BIC', train_results.bic_min_order)
 print("-" * 120)
 
 model_results.plot_diagnostics(figsize=(16, 12))
-plt.show()
+# plt.show()
