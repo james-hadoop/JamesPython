@@ -22,7 +22,7 @@ psutil.virtual_memory()  # 获取内存信息
 psutil.disk_partitions()  # 获取各分区的信息
 # psutil.disk_usage()  # 获取各分区的使用情况
 psutil.disk_io_counters(perdisk=True)  # 获取各个分区的io情况
-psutil.disk_io_counters(perdisk=True)['sda1'].read_count  # 获取sda1的io读取情况
+# psutil.disk_io_counters(perdisk=True)['sda1'].read_count  # 获取sda1的io读取情况
 # 监控网络信息
 
 

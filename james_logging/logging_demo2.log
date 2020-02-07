@@ -1,5 +1,5 @@
-2019-10-13 15:06:59,261 logging_demo2.py [line:23] DEBUG: debug
-2019-10-13 15:06:59,261 logging_demo2.py [line:24] INFO: info
-2019-10-13 15:06:59,261 logging_demo2.py [line:25] WARNING: warning
-2019-10-13 15:06:59,261 logging_demo2.py [line:26] ERROR: error
-2019-10-13 15:06:59,261 logging_demo2.py [line:27] CRITICAL: critical
+2020-02-07 07:37:27,462 logging_demo2.py [line:23] DEBUG: debug
+2020-02-07 07:37:27,462 logging_demo2.py [line:24] INFO: info
+2020-02-07 07:37:27,462 logging_demo2.py [line:25] WARNING: warning
+2020-02-07 07:37:27,462 logging_demo2.py [line:26] ERROR: error
+2020-02-07 07:37:27,462 logging_demo2.py [line:27] CRITICAL: critical

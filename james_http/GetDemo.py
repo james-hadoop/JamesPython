@@ -1,4 +1,4 @@
-import urllib
+# import urllib
 import urllib2
 
 url = 'http://localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=15821615886'
