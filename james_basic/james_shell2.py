@@ -24,7 +24,7 @@ keys = ['创新',
         '管理',
         '推动',
         '激发',
-        '实施方案',
+        '实施',
         '推广',
         '产业',
         '推进',
@@ -49,7 +49,8 @@ keys = ['创新',
         '引导基金',
         '资助',
         '降低',
-        '深化']
+        '深化',
+        '科技']
 
 url = "http://www.hangzhou.gov.cn/col/col1346101/"
 
@@ -83,7 +84,7 @@ browser.get(url)
 source = browser.page_source
 time.sleep(1)
 
-targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_even']")
+targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_odd']")
 print(">>>")
 i = 0
 for t in targets:
