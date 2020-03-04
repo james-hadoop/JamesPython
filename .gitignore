@@ -16,3 +16,6 @@ bin/
 
 # Mac #
 .DS_Store
+
+# _data #
+_data/tct
