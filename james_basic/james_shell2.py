@@ -55,7 +55,7 @@ keys = ['创新',
 url = "http://www.hangzhou.gov.cn/col/col1346101/"
 
 _sql = """
-    insert into yqc_spider_hangzhou(id, title, url, pub_time, pub_org, doc_id, index_id, key_cnt, region, update_time, cont) values (null, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    insert into yqc_spider(id, title, url, pub_time, pub_org, doc_id, index_id, key_cnt, region, update_time, cont) values (null, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
       """
 
 
@@ -84,7 +84,7 @@ browser.get(url)
 source = browser.page_source
 time.sleep(1)
 
-targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_odd']")
+targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_even']")
 print(">>>")
 i = 0
 for t in targets:
