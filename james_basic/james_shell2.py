@@ -75,10 +75,10 @@ getDbConnection()
 
 cursor = conn.cursor()
 
-browser = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
-browser2 = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
-# browser = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
-# browser2 = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
+# browser = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
+# browser2 = webdriver.Chrome(executable_path=r"/Users/qjiang/install/chromedriver")
+browser = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
+browser2 = webdriver.Chrome(executable_path=r"/home/james/_AllDocMap/06_Software/chromedriver")
 
 browser.get(url)
 source = browser.page_source

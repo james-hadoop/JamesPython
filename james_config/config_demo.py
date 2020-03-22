@@ -26,7 +26,7 @@ print(config['DEFAULT']['Compression'])
 for key in config['bitbucket.org']:
     print('%s -> %s' % (key, config['bitbucket.org'][key]))
 
-config.set('bitbucket.org','user','jj')
+config.set('bitbucket.org', 'user', 'jj')
 
 with open('james_config.ini', 'w') as configfile:
     config.write(configfile)

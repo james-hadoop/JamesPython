@@ -6,8 +6,10 @@ from datetime import datetime
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
 
+
 def tick():
     print('Tick! The time is: %s' % datetime.now())
+
 
 if __name__ == '__main__':
     scheduler = BlockingScheduler()
@@ -18,5 +20,3 @@ if __name__ == '__main__':
         scheduler.start()
     except (KeyboardInterrupt, SystemExit):
         pass
-
-
