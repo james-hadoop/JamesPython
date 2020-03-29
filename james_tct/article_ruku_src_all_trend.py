@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+import datetime
+import inspect
+import json
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -27,7 +38,7 @@ fig = plt.figure(figsize=(10, 6))
 colors = ['deepskyblue', 'blueviolet', 'peru', 'brown', 'black', 'red', 'gold', 'darkorange']
 i = 0
 
-df = pd.read_csv('../_data/tct/article_qiyong_20200301.csv')
+df = pd.read_csv('_data/tct/article_ruku_20200301.csv')
 data = df[df['s_cont_stat_date'] > '2019-01-23']
 dataWeek = data.copy()
 

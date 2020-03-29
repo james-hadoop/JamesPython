@@ -13,11 +13,11 @@ sender = 'jamesqjiang@163.com'
 receivers = ['sysinfo@yuanqucha.com']
 
 content = u'请查收最新的园区政策信息'
-title = '园区政策信息_20200322'
+title = '园区政策信息_20200329'
 
-# csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200322.csv"
-csv_file_path = "/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200322.csv"
-csv_file_name = "yqc_spider_20200322.csv"
+# csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200329.csv"
+csv_file_path = "/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200329.csv"
+csv_file_name = "yqc_spider_20200329.csv"
 
 msg = MIMEMultipart()
 msg.attach(MIMEText('尊敬的先生/女士：  请查收最新的园区政策信息，感谢您的订阅！'))

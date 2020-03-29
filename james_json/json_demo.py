@@ -1,6 +1,6 @@
 import json
 
-f = open('demo.json', 'r')
+f = open('../demo.json', 'r')
 
 data = f.read()
 json_data = json.loads(data)

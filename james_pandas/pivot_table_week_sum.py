@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+import datetime
+import inspect
+import json
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -24,7 +34,7 @@ print(ret)
 fig = plt.figure(figsize=(10, 6))
 colors = ['red', 'blue', 'green', 'orange', 'black', 'cyan', 'darkgreen', 'darkred', 'gold']
 
-df = pd.read_csv('../_data/20191027/week_of_year_mean.csv', header=None)
+df = pd.read_csv('_data/20191027/week_of_year_mean.csv', header=None)
 print(df)
 df.columns = ['week_of_year', 'cnt']
 df.sort_values(axis=0, by=['week_of_year'], ascending=True)
