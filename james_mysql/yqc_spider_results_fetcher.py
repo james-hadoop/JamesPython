@@ -67,7 +67,7 @@ FROM
              region,
              update_time
       FROM developer.yqc_spider
-      WHERE update_time>'2020-03-28 00:00:00') t_cont ON t_id.id=t_cont.id) tt
+      WHERE update_time>'2020-04-04 00:00:00') t_cont ON t_id.id=t_cont.id) tt
 WHERE title IS NOT NULL
 ORDER BY region,
          key_cnt DESC;
@@ -79,7 +79,8 @@ ORDER BY region,
     df = df.applymap(lambda x: str(x).strip())
 
     print(df)
-    df.to_csv("/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200329.csv")
+    df.to_csv("/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200405.csv")
+    print("Results has been saved.")
 
     # YQC_DB_CONN = pymysql.connect(host=db_host, user=db_user, passwd=db_passwd,
     #                               db=db_db,
