@@ -4,6 +4,10 @@
 
 
 class Solution:
+    """
+        https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+    """
+
     def fibonacci(self, n):
         if n == 0:
             return 0
@@ -27,6 +31,10 @@ class Solution:
             b = a
             a = ret
         return ret
+
+    """
+        https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+    """
 
     def merge_sort_link(self, p_head1, p_head2):
         if p_head1 is None:
