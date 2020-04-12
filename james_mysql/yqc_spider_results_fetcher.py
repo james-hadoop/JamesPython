@@ -79,7 +79,12 @@ ORDER BY region,
     df = df.applymap(lambda x: str(x).strip())
 
     print(df)
-    df.to_csv("/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200405.csv")
+    os_info = os.uname()
+    if os_info.sysname == 'Darwin':
+        csv_file_path = r"/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200412.csv"
+    else:
+        csv_file_path = r"/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200412.csv"
+    df.to_csv(csv_file_path)
     print("Results has been saved.")
 
     # YQC_DB_CONN = pymysql.connect(host=db_host, user=db_user, passwd=db_passwd,

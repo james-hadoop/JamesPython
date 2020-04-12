@@ -1,3 +1,4 @@
+import os
 import smtplib
 from email.header import Header
 from email.mime.application import MIMEApplication
@@ -13,11 +14,14 @@ sender = 'jamesqjiang@163.com'
 receivers = ['sysinfo@yuanqucha.com']
 
 content = u'请查收最新的园区政策信息'
-title = '园区政策信息_20200405'
+title = '园区政策信息_20200412'
 
-# csv_file_path = "/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200405.csv"
-csv_file_path = "/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200405.csv"
-csv_file_name = "yqc_spider_20200405.csv"
+os_info = os.uname()
+if os_info.sysname == 'Darwin':
+    csv_file_path = r"/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200412.csv"
+else:
+    csv_file_path = r"/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200412.csv"
+csv_file_name = "yqc_spider_20200412.csv"
 
 msg = MIMEMultipart()
 msg.attach(MIMEText('尊敬的先生/女士：  请查收最新的园区政策信息，感谢您的订阅！'))

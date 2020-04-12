@@ -3,9 +3,12 @@ import json
 f = open('../demo.json', 'r')
 
 data = f.read()
-json_data = json.loads(data)
+"""
+    把json转成字典
+"""
+json_dict = json.loads(data)
 
-print(json_data['name'])
+print(json_dict['name'])
 f.close()
 
 dic = {
@@ -13,8 +16,11 @@ dic = {
     "age": 18
 }
 
-data = json.dumps(dic)
+"""
+    把字典转成json
+"""
+json_obj = json.dumps(dic)
 
 f = open('json_demo2.json', 'w')
-f.write(data)
+f.write(json_obj)
 f.close()

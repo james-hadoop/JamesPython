@@ -44,7 +44,7 @@ class Solution:
         if number == 2:
             return 2
 
-        ret = 0;
+        ret = 0
         a = 1
         b = 2
         for i in range(3, number + 1):

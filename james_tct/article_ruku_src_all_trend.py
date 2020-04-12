@@ -38,7 +38,7 @@ fig = plt.figure(figsize=(10, 6))
 colors = ['deepskyblue', 'blueviolet', 'peru', 'brown', 'black', 'red', 'gold', 'darkorange']
 i = 0
 
-df = pd.read_csv('_data/tct/article_ruku_20200301.csv')
+df = pd.read_csv('/Users/qjiang/workspace4python/JamesPython/_data/article_ruku_20200301.csv')
 data = df[df['s_cont_stat_date'] > '2019-01-23']
 dataWeek = data.copy()
 
