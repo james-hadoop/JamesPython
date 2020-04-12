@@ -127,4 +127,6 @@ ENV/
 # mypy
 .mypy_cache/
 
-python_practice_of_data_analysis_and_mining
+/python_practice_of_data_analysis_and_mining/*
+
+/_data/*
