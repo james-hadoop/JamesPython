@@ -5,8 +5,13 @@
 
 class Solution:
     def __init__(self):
+        ## 两个栈实现队列
         self.acceptStack = []
         self.outputStack = []
+
+        ## 包含min函数的栈
+        self.stask = []
+        self.minValue = []
 
     """
         [!00_斐波那契数列](https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
@@ -158,9 +163,70 @@ class Solution:
     # 的一个旋转，该数组的最小值为1。
     # NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
     def min_number_in_rotate_array(self, rotateArray):
+        if not rotateArray:
+            return 0
 
+        left = 0
+        right = len(rotateArray) - 1
+        while left <= right:
+            mid = (left + right) >> 1
 
-        return None
+            if rotateArray[mid] < rotateArray[mid - 1]:
+                return rotateArray[mid]
+            elif rotateArray[mid] < rotateArray[right]:
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        return 0
+
+    """
+        [!11_调整数组顺序使奇数位于偶数前面](https://www.nowcoder.com/practice/beb5aa231adc45b2a5dcc5b62c93f593?tpId=13&tqId=11166&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    def re_order_array(self, array):
+        ret = []
+
+        for v in array:
+            if v % 2 == 1:
+                ret.append(v)
+        for v in array:
+            if v % 2 == 0:
+                ret.append(v)
+
+        return ret
+
+    """
+        [!13_包含min函数的栈](https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。
+    # 注意：保证测试中不会当栈为空的时候，对栈调用pop()或者min()或者top()方法。
+    def push13(self, node):
+        self.stask.append(node)
+
+        if self.minValue:
+            if self.minValue[-1] > node:
+                self.minValue.append(node)
+            else:
+                self.minValue.append(self.minValue[-1])
+
+    def pop13(self):
+        if self.stask == []:
+            return None
+        self.minValue.pop()
+        return self.stask.pop()
+
+    def top13(self):
+        if self.stask == []:
+            return None
+        return self.stask[-1]
+
+    def min13(self):
+        if self.minValue == []:
+            return None
+        return self.minValue[-1]
 
     """
         [!19_合并两个排序的链表](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
@@ -204,11 +270,27 @@ class Solution:
 
         return new_head
 
+    """
+        冒泡排序
+    """
+
+    def maopao_sort(self, array):
+        for i in range(len(array)):
+            for j in range(len(array) - i - 1):
+                if array[j] > array[j + 1]:
+                    array[j], array[j + 1] = array[j + 1], array[j]
+
+        return array
+
 
 def main():
     s = Solution()
-    ret = s.fibonacci2(10)
-    print(ret)
+    # ret = s.fibonacci2(10)
+    # print(ret)
+
+    array = [9, 8, 10, 15, 7, 3, 20, 14, 2]
+    arr = s.maopao_sort(array)
+    print(arr)
 
 
 if __name__ == '__main__':
