@@ -59,8 +59,41 @@ class Solution:
     """
 
     # array 二维列表
-    def Find(self, target, array):
-        return None
+    def find(self, target, array):
+        row_cnt = len(array)
+        i = 0
+        col_cnt = len(array[0])
+        j = len(array[0]) - 1
+
+        while i < row_cnt and j >= 0:
+            value = array[i][j]
+            if value == target:
+                return True
+            elif value > target:
+                j -= 1
+            else:
+                i += 1
+        return False
+
+    """
+        [!07_替换空格](https://www.nowcoder.com/practice/4060ac7e3e404ad1a894ef3e17650423?tpId=13&tqId=11155&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # s 源字符串
+    def replace_space(self, s):
+        strLen = len(s)
+
+        aaa = []
+        for i in range(strLen - 1, -1, -1):
+            if s[i] == " ":
+                aaa.append("0")
+                aaa.append("2")
+                aaa.append("%")
+            else:
+                aaa.append(s[i])
+
+        aaa.reverse()
+        return ''.join(aaa)
 
     """
         [!19_合并两个排序的链表](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
