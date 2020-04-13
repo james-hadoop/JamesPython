@@ -5,6 +5,27 @@
 
 class Solution:
     """
+        使用2个栈实现1个队列
+    """
+
+    def __init__(self):
+        self.acceptStack = []
+        self.outputStack = []
+
+    def push(self, node):
+        self.acceptStack.append(node)
+
+    def pop(self):
+        if self.outputStack == []:
+            while self.acceptStack:
+                self.outputStack.append(self.acceptStack.pop())
+
+        if self.outputStack != []:
+            return self.outputStack.pop()
+        else:
+            return None
+
+    """
         [!斐波那契数列](https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
     """
 
@@ -53,6 +74,31 @@ class Solution:
             b = ret
 
         return ret
+
+    """
+        二分查找
+    """
+
+    def bSearch(self, array, target):
+        left = 0
+        right = len(array) - 1
+
+        while left < right:
+            mid = (left + right) >> 1
+            if array[mid] == target:
+                return mid
+            elif array[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return None
+
+    """
+        旋转数组的最小数字
+    """
+
+    def minNumberInRotateArray(self, rotateArray):
 
     """
         [!合并两个排序的链表](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
