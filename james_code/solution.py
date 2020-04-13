@@ -158,6 +158,8 @@ class Solution:
     # 的一个旋转，该数组的最小值为1。
     # NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
     def min_number_in_rotate_array(self, rotateArray):
+
+
         return None
 
     """
