@@ -4,6 +4,10 @@
 
 
 class Solution:
+    def __init__(self):
+        self.acceptStack = []
+        self.outputStack = []
+
     """
         [!00_斐波那契数列](https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
     """
@@ -94,6 +98,49 @@ class Solution:
 
         aaa.reverse()
         return ''.join(aaa)
+
+    """
+        [!08_用两个栈实现队列](https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&tqId=11158&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    def push(self, node):
+        self.acceptStack.append(node)
+
+    def pop(self):
+        if self.outputStack == []:
+            while self.acceptStack:
+                self.outputStack.append(self.acceptStack.pop())
+
+        if self.outputStack != []:
+            return self.outputStack.pop()
+        else:
+            return None
+
+    """
+        [!二分查找]
+    """
+
+    def b_search(self, array, target):
+        left = 0
+        right = len(array) - 1
+
+        while left < right:
+            mid = (left + right) >> 1
+            if array[mid] == target:
+                return mid
+            elif array[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return None
+
+    """
+        [!09_旋转数组的最小数字](https://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&tqId=11159&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    def minNumberInRotateArray(self, rotateArray):
+        return None
 
     """
         [!19_合并两个排序的链表](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
