@@ -3,6 +3,19 @@
 """
 
 
+# 链表节点
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+def print_chain(node):
+    while node:
+        print(node.val)
+        node = node.next
+
+
 class Solution:
     def __init__(self):
         ## 两个栈实现队列
@@ -306,6 +319,25 @@ class Solution:
                 index += 1
 
         return True if stack == [] else False
+
+    """
+        [16_从尾到头打印链表](https://www.nowcoder.com/practice/d0267f7f55b3412ba93bd35cfa8e8035?tpId=13&tqId=11156&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
+    def print_list_from_tail_to_head(self, listNode):
+        ret = []
+
+        if not listNode:
+            return ret
+
+        pTmp = ListNode
+
+        while pTmp:
+            ret.insert(0, pTmp.val)
+            pTmp = pTmp.next
+        return ret
 
 
 def main():
