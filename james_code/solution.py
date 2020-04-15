@@ -335,9 +335,30 @@ class Solution:
         pTmp = ListNode
 
         while pTmp:
-            ret.insert(0, pTmp.val)
+            ret.insert(0, pTmp)
             pTmp = pTmp.next
         return ret
+
+    """
+        [17_链表中倒数第k个结点](https://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tpId=13&tqId=11167&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 输入一个链表，输出该链表中倒数第k个结点。
+    def find_kth_to_tail(self, head, k):
+        fstPt = head
+        secPt = head
+
+        for i in range(k):
+            if fstPt == None:
+                return None
+            fstPt = fstPt.next
+
+        while fstPt != None:
+            fstPt = fstPt.next
+            secPt = secPt.next
+
+        return secPt
 
 
 def main():

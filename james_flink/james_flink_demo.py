@@ -10,8 +10,8 @@ env.set_parallelism(1)
 t_config = TableConfig()
 t_env = BatchTableEnvironment.create(env, t_config)
 
-src_file_path = '/Users/qjiang/workspace/JamesFlink/src/main/resources/data/hello.txt'
-sink_file_path = '/Users/qjiang/workspace/JamesFlink/src/main/resources/data/hello.out'
+src_file_path = '/home/james/workspace/JamesFlink/src/main/resources/data/hello.txt'
+sink_file_path = 'data/hello.out'
 
 t_env.connect(FileSystem().path(src_file_path)).with_format(
     OldCsv().line_delimiter(' ').field('word', DataTypes.STRING())).with_schema(
