@@ -10,6 +10,14 @@ class ListNode:
         self.next = None
 
 
+# 复杂链表节点
+class RandomListNode:
+    def __init__(self, x):
+        self.label = x
+        self.next = None
+        self.random = None
+
+
 def print_chain(node):
     while node:
         print(node.val)
@@ -242,48 +250,6 @@ class Solution:
         return self.minValue[-1]
 
     """
-        [19_合并两个排序的链表](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-    """
-
-    # 题目描述
-    # 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
-    def merge_sort_link(self, p_head1, p_head2):
-        if p_head1 is None:
-            return p_head2
-
-        if p_head2 is None:
-            return p_head1
-
-        new_head = p_head1 if p_head1.val < p_head2.val else p_head2
-
-        p_tmp1 = p_head1
-        p_tmp2 = p_head2
-        if new_head == p_head1:
-            p_tmp1 = p_tmp1.next
-        else:
-            p_tmp2 = p_tmp2.next
-
-        previous_pointer = new_head
-
-        while p_tmp1 and p_tmp2:
-            if p_tmp1.val < p_tmp2.val:
-                previous_pointer.next = p_tmp1
-                previous_pointer = p_tmp1
-                p_tmp1 = p_tmp1.next
-
-            else:
-                previous_pointer.next = p_tmp2
-                previous_pointer = p_tmp2
-                p_tmp2 = p_tmp2.next
-
-        if p_tmp1 is None:
-            previous_pointer.next = p_tmp2
-        else:
-            previous_pointer.next = p_tmp1
-
-        return new_head
-
-    """
         冒泡排序
     """
 
@@ -346,19 +312,97 @@ class Solution:
     # 题目描述
     # 输入一个链表，输出该链表中倒数第k个结点。
     def find_kth_to_tail(self, head, k):
-        fstPt = head
-        secPt = head
+        fstPtr = head
+        secPtr = head
 
         for i in range(k):
-            if fstPt == None:
+            if fstPtr == None:
                 return None
-            fstPt = fstPt.next
+            fstPtr = fstPtr.next
 
-        while fstPt != None:
-            fstPt = fstPt.next
-            secPt = secPt.next
+        while fstPtr != None:
+            fstPtr = fstPtr.next
+            secPtr = secPtr.next
 
-        return secPt
+        return secPtr
+
+    """
+        [18_反转链表](https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 输入一个链表，反转链表后，输出新链表的表头。
+    def reverse_list(self, pHead):
+        if pHead == None:
+            return None
+        if pHead.next == None:
+            return pHead
+
+        leftPtr = pHead
+        midPtr = pHead.next
+        rightPtr = midPtr.next
+        leftPtr.next = None
+
+        while rightPtr != None:
+            midPtr.next = leftPtr
+            leftPtr = midPtr
+            midPtr = rightPtr
+            rightPtr = rightPtr.next
+
+        midPtr.next = leftPtr
+
+        return midPtr
+
+    """
+         [19_合并两个排序的链表](https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=13&tqId=11169&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
+    """
+
+    # 题目描述
+    # 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+    def merge_sort_link(self, p_head1, p_head2):
+        if p_head1 is None:
+            return p_head2
+
+        if p_head2 is None:
+            return p_head1
+
+        new_head = p_head1 if p_head1.val < p_head2.val else p_head2
+
+        p_tmp1 = p_head1
+        p_tmp2 = p_head2
+        if new_head == p_head1:
+            p_tmp1 = p_tmp1.next
+        else:
+            p_tmp2 = p_tmp2.next
+
+        previous_pointer = new_head
+
+        while p_tmp1 and p_tmp2:
+            if p_tmp1.val < p_tmp2.val:
+                previous_pointer.next = p_tmp1
+                previous_pointer = p_tmp1
+                p_tmp1 = p_tmp1.next
+
+            else:
+                previous_pointer.next = p_tmp2
+                previous_pointer = p_tmp2
+                p_tmp2 = p_tmp2.next
+
+        if p_tmp1 is None:
+            previous_pointer.next = p_tmp2
+        else:
+            previous_pointer.next = p_tmp1
+
+        return new_head
+
+    """
+        [20_复杂链表的复制](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
+    def link_clone(self, pHead):
+        return None
 
 
 def main():
