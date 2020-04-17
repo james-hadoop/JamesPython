@@ -11,7 +11,7 @@ t_config = TableConfig()
 t_env = BatchTableEnvironment.create(env, t_config)
 
 src_file_path = '/home/james/workspace/JamesFlink/src/main/resources/data/hello.txt'
-sink_file_path = 'data/hello.out'
+sink_file_path = 'data/hello1.out'
 
 t_env.connect(FileSystem().path(src_file_path)).with_format(
     OldCsv().line_delimiter(' ').field('word', DataTypes.STRING())).with_schema(
@@ -23,6 +23,7 @@ t_env.connect(FileSystem().path(sink_file_path)).with_format(
 
 # t_env.scan('mySource').group_by('word').select('word, count(1)').insert_into('mySink')
 # t_env.scan('mySource').group_by('word').select('word, count(1)').print_schema()
-t_env.scan('jamesSource').group_by('word').select('word, count(1)').insert_into('jamesSink')
+t_env.scan('jamesSink').select("*").print_schema()
 
-t_env.execute("python_job")
+job_name='j'
+t_env.execute(job_name)
