@@ -1,5 +1,6 @@
 import string
 
+from pythonds import Queue, Deque
 from pythonds.basic import Stack
 
 
@@ -144,6 +145,112 @@ def postfixEval(postfixExpr):
             operandStack.push(result)
 
     return operandStack.pop()
+
+
+# 3-9 用python实现队列
+class JamesQueue:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.isEmpty() == []
+
+    def enqueue(self, item):
+        self.items.insert(0, item)
+
+    def dequeue(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
+
+# 3-10 传土豆模拟程序(约瑟夫环)
+def hotPotato(nameList, num):
+    simQueue = Queue()
+
+    for name in nameList:
+        simQueue.enqueue(name)
+
+    while simQueue.size() > 1:
+        for i in range(num):
+            simQueue.enqueue(simQueue.dequeue())
+        simQueue.dequeue()
+
+    return simQueue.dequeue()
+
+
+# 3-14 用python实现双端队列
+class JamesDeque:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def addFront(self, item):
+        self.items.append(item)
+
+    def addRear(self, item):
+        self.items.insert(0, item)
+
+    def removeFont(self):
+        self.items.pop()
+
+    def removeRear(self):
+        return self.items.pop(0)
+
+    def size(self):
+        return len(self.items)
+
+
+# 3-15 回文检测器
+def palchecker(aString):
+    charDeque = Deque()
+
+    for ch in aString:
+        charDeque.addRear(ch)
+
+    stillEqual = True
+
+    while charDeque.size() > 1 and stillEqual:
+        first = charDeque.removeFront()
+        last = charDeque.removeRear()
+        if first != last:
+            stillEqual = False
+
+    return stillEqual
+
+
+# 3-16 Node类
+class JamesNode:
+    def __init__(self, initData):
+        self.data = initData
+        self.next = None
+
+    def getData(self):
+        return self.data
+
+    def getNext(self):
+        return self.next
+
+    def setData(self, newData):
+        self.data = newData
+
+    def setNext(self, newNext):
+        self.next = newNext
+
+    def isEmpty(self):
+        return self.head == None
+
+
+# 4-3 将整数转换成以2-16为进制基数的字符串
+def toStr(n, base):
+    convertString = "0123456789ABCDEF"
+    if n < base:
+        return convertString[n]
+    else:
+        return toStr(n // base, base) + convertString(n % base)
 
 
 def main():
