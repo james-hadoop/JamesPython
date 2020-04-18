@@ -253,8 +253,22 @@ def toStr(n, base):
         return toStr(n // base, base) + convertString(n % base)
 
 
+# 4-8 汉诺塔问题
+def moveDisk(fp, tp):
+    print("moving disk from %d to %d\n" % (fp, tp))
+
+
+def moveTower(height, fromPole, toPole, withPole):
+    if height >= 1:
+        moveTower(height - 1, fromPole, withPole, toPole)
+        moveDisk(fromPole, toPole)
+        moveTower(height - 1, withPole, toPole, fromPole)
+
+
 def main():
     print("james_data_structure start...")
+
+    moveTower(3, 1, 2, 3)
 
 
 if __name__ == '__main__':
