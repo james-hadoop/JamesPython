@@ -454,6 +454,63 @@ class Solution:
         if pTmp2:
             return self.find_equal(pTmp1, pTmp2, pHead1, pHead2)
 
+    """
+        [22_孩子们的游戏(圆圈中最后剩下的数)](https://www.nowcoder.com/practice/f78a359491e64a50bce2d89cff857eb6?tpId=13&tqId=11199&tPage=3&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 每年六一儿童节, 牛客都会准备一些小礼物去看望孤儿院的小朋友, 今年亦是如此。HF作为牛客的资深元老, 自然也准备了一些小游戏。其中, 有个游戏是这样的: 首先, 让小朋友们围成一个大圈。然后, 他随机指定一个数m, 让编号为0的小朋友开始报数。每次喊到m - 1
+    # 的那个小朋友要出列唱首歌, 然后可以在礼品箱中任意的挑选礼物, 并且不再回到圈中, 从他的下一个小朋友开始, 继续0...m - 1
+    # 报数....这样下去....直到剩下最后一个小朋友, 可以不用表演, 并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!! ^ _ ^)。请你试着想下, 哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
+    #
+    # 如果没有小朋友，请返回 - 1
+    def LastRemaining_Solution(self, n, m):
+        if n < 1 or m < 1:
+            return -1
+        if n == 1:
+            return 0
+        value = 0
+
+        for i in range(2, n + 1):
+            currentValue = (value + m) % i
+            value = currentValue
+
+        return value
+
+    """
+        [23_链表中环的入口结点](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&tPage=3&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+    def EntryNodeOfLoop(self, pHead):
+        # 需要定义2个指针，一个跳两步，一个跳一步
+        # 循环跳
+        # 要么是快的指针为空（没有环），要么是快慢相等（有环）
+        if pHead == None:
+            return None
+
+        fastPtr = pHead
+        slowPtr = pHead
+
+        while fastPtr and fastPtr.next:
+            fastPtr = fastPtr.next.next
+            slowPtr = slowPtr.next
+
+            if fastPtr == slowPtr:
+                break
+
+        if fastPtr == None or fastPtr.next == None:
+            return None
+
+        fastPtr = pHead
+
+        while fastPtr != slowPtr:
+            fastPtr = fastPtr.next
+            slowPtr = slowPtr.next
+
+        return fastPtr
+
 
 def main():
     s = Solution()
