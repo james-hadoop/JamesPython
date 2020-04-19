@@ -2,8 +2,10 @@
     牛客网：https://www.nowcoder.com/ta/coding-interviews?query=&asc=true&order=&tagQuery=&page=1
 """
 
-
 # 链表节点
+from twisted.web import static
+
+
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -402,7 +404,55 @@ class Solution:
     # 题目描述
     # 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
     def link_clone(self, pHead):
+        # TODO
         return None
+
+    """
+        [22_两个链表的第一个公共结点](https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）
+    # 第一个参数给比较短的那个链表的值
+    # 第二个参数给比较长的那个链表的值
+    # 第三个参数是比较端的那个链表头
+    # 第三个参数是比较长的那个链表头
+    def find_equal(self, shortPtr, longPtr, shortHead, longHead):
+        k = 0
+
+        # 寻找出链表长度之间的差值
+        while longPtr:
+            longPtr = longPtr.next
+            k += 1
+
+        # 先让长的那个走k步
+        longPtr = longHead
+        shortPtr = shortHead
+        for i in range(k):
+            longPtr = longPtr.next
+
+        while longPtr != shortPtr:
+            longPtr = longPtr.next
+            shortPtr = shortPtr.next
+
+        return shortPtr
+
+    def FindFirstCommonNode(self, pHead1, pHead2):
+        pTmp1 = pHead1
+        pTmp2 = pHead2
+
+        while pTmp1 and pTmp2:
+            if pTmp1 == pTmp2:
+                return pTmp1
+
+            pTmp1 = pTmp1.next
+            pTmp2 = pTmp2.next
+
+        if pTmp1:
+            return self.find_equal(pTmp2, pTmp1, pHead2, pHead1)
+
+        if pTmp2:
+            return self.find_equal(pTmp1, pTmp2, pHead1, pHead2)
 
 
 def main():
