@@ -111,3 +111,9 @@ def searchFrom(maze, startRow, startColumn):
     else:
         maze.updatePosition(startRow, startColumn, Turtle.DEAD_END)
     return
+
+
+if __name__ == '__main__':
+    maze = Maze('turtle_maze.txt')
+
+    searchFrom(maze, 5, 5)

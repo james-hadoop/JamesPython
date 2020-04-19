@@ -265,10 +265,56 @@ def moveTower(height, fromPole, toPole, withPole):
         moveTower(height - 1, withPole, toPole, fromPole)
 
 
+# 4-14 找零问题的递归解决方案
+# recMc([1, 5, 10, 25], 63)
+def recMc(coinValueList, change):
+    minCoins = change
+
+    if change in coinValueList:
+        return 1
+    else:
+        for i in [c for c in coinValueList if c <= change]:
+            numCoins = 1 + recMc(coinValueList, change - i)
+            if numCoins < minCoins:
+                minCoins = numCoins
+
+    return minCoins
+
+
+# 4-17 动态规划算法找零钱
+def printCoins(coinsUsed, change):
+    coin = change
+    while coin > 0:
+        thisCoin = coinsUsed[coin]
+        print(thisCoin)
+        coin = coin - thisCoin
+
+
+def dpMakeChange(coinValueList, change, minCoins, coinsUsed):
+    for cents in range(change + 1):
+        coinCount = cents
+        newCoin = 1
+
+        for j in [c for c in coinValueList if c <= cents]:
+            if minCoins[cents - j] + 1 < coinCount:
+                coinCount = minCoins[cents - j] + 1
+                newCoin = j
+
+        minCoins[cents] = coinCount
+        coinsUsed[cents] = newCoin
+
+    return minCoins[change]
+
+
 def main():
     print("james_data_structure start...")
 
-    moveTower(3, 1, 2, 3)
+    c1 = [1, 5, 10, 21, 25]
+    coinsUsed = [0] * 64
+    coinCount = [0] * 64
+    retChange = dpMakeChange(c1, 63, coinCount, coinsUsed)
+    print(f"retChange={retChange}")
+    printCoins(coinsUsed, 63)
 
 
 if __name__ == '__main__':
