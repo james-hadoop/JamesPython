@@ -511,6 +511,22 @@ class Solution:
 
         return fastPtr
 
+    """
+        [24_二进制中1的个数](https://www.nowcoder.com/practice/8ee967e43c2c4ec193b040ea7fbb10b8?tpId=13&tqId=11164&tPage=1&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。
+    def NumberOf1(self, n):
+        count = 0
+        while n:
+            n = n & (n - 1)
+            count += 1
+
+            n = 0xFFFFFFFF & n
+
+        return count
+
 
 def main():
     s = Solution()
