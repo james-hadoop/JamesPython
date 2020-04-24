@@ -572,7 +572,7 @@ class Solution:
             elif midValue > 1:
                 num = (highValue + 1) * pow(10, count)
             else:
-                num = (highValue) * pow(10, count) + lowValue
+                num = (highValue) * pow(10, count) + lowValue + 1
             sumNum += num
             count += 1
 
