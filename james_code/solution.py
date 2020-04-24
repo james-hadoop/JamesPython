@@ -527,6 +527,57 @@ class Solution:
 
         return count
 
+    """
+        [25_不用加减乘除做加法](https://www.nowcoder.com/practice/59ac416b4b944300b617d4f7f111b215?tpId=13&tqId=11201&tPage=3&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 写一个函数，求两个整数之和，要求在函数体内不得使用 +、-、 * 、 / 四则运算符号。
+    def Add(self, num1, num2):
+        xorNum = num1 ^ num2
+        andNum = num1 & num2
+
+        while andNum != 0:
+            tmp1 = xorNum ^ andNum
+            tmp2 = xorNum & andNum
+            tmp1 = tmp1 & 0xFFFFFFFF
+            xorNum = tmp1
+            andNum = tmp2
+
+        return xorNum if xorNum <= 0x7FFFFFFF else ~(xorNum ^ 0xFFFFFFFF)
+
+    """
+        [27_整数中1出现的次数（从1到n整数中1出现的次数）](https://www.nowcoder.com/practice/bd7f978302044eee894445e244c7eee6?tpId=13&tqId=11184&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 求出1~13的整数中1出现的次数, 并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13
+    # 因此共出现6次, 但是对于后面问题他就没辙了。ACMer希望你们帮帮他, 并把问题更加普遍化, 可以很快的求出任意非负整数区间中1出现的次数（从1到n中1出现的次数）。
+    def NumberOf1Between1AndN_Solution(self, n):
+        highValue = 1
+        preceise = 1
+        midValue = 1
+        lowValue = 1
+        count = 0
+        sumNum = 0
+
+        while highValue != 0:
+            highValue = n // (preceise * 10)
+            midValue = (n // preceise) % 10
+            lowValue = n % preceise
+            preceise = preceise * 10
+
+            if midValue == 0:
+                num = (highValue - 1 + 1) * pow(10, count)
+            elif midValue > 1:
+                num = (highValue + 1) * pow(10, count)
+            else:
+                num = (highValue) * pow(10, count) + lowValue
+            sumNum += num
+            count += 1
+
+        return sumNum
+
 
 def main():
     s = Solution()
