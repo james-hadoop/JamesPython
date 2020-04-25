@@ -578,6 +578,80 @@ class Solution:
 
         return sumNum
 
+    """
+        [28_丑数](https://www.nowcoder.com/practice/6aa9e04fc3794f68acf8778237ba065b?tpId=13&tqId=11186&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8
+    # 都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
+    def GetUglyNumber_Solution(self, index):
+        if index < 1:
+            return 0
+
+        uglyList = [1]
+        twoPointer = 0
+        threePointer = 0
+        fivePointer = 0
+        count = 1
+
+        while count != index:
+            minValue = min(2 * uglyList[twoPointer], 3 * uglyList[threePointer], 5 * uglyList[fivePointer])
+            uglyList.append(minValue)
+            count += 1
+
+            if minValue == 2 * uglyList[twoPointer]:
+                twoPointer += 1
+
+            if minValue == 3 * uglyList[threePointer]:
+                threePointer += 1
+
+            if minValue == 5 * uglyList[fivePointer]:
+                fivePointer += 1
+
+        return uglyList[count - 1]
+
+    """
+        [29_数组中只出现一次的数字](https://www.nowcoder.com/practice/e02fdb54d7524710a7d664d082bb7811?tpId=13&tqId=11193&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
+    """
+
+    # 题目描述
+    # 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。
+    def FindNumsAppearOnce(self, array):
+        if len(array) < 2:
+            return None
+
+        twoNumXor = None
+        for num in array:
+            if twoNumXor == None:
+                twoNumXor = num
+            else:
+                twoNumXor = twoNumXor ^ num
+
+        count = 0
+        while twoNumXor % 2 == 0:
+            twoNumXor = twoNumXor >> 1
+            count += 1
+
+        mask = 1 << count
+
+        firstNum = None
+        secondNum = None
+
+        for num in array:
+            if mask & num == 0:
+                if firstNum == None:
+                    firstNum = num
+                else:
+                    firstNum = firstNum ^ num
+            else:
+                if secondNum == None:
+                    secondNum = num
+                else:
+                    secondNum = secondNum ^ num
+
+        return firstNum, secondNum
+
 
 def main():
     s = Solution()

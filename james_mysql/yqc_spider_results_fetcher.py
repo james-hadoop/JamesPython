@@ -67,7 +67,7 @@ FROM
              region,
              update_time
       FROM developer.yqc_spider
-      WHERE update_time>'2020-04-04 00:00:00') t_cont ON t_id.id=t_cont.id) tt
+      WHERE update_time>'2020-04-24 00:00:00') t_cont ON t_id.id=t_cont.id) tt
 WHERE title IS NOT NULL
 ORDER BY region,
          key_cnt DESC;
@@ -81,9 +81,9 @@ ORDER BY region,
     print(df)
     os_info = os.uname()
     if os_info.sysname == 'Darwin':
-        csv_file_path = r"/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200412.csv"
+        csv_file_path = r"/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200425.csv"
     else:
-        csv_file_path = r"/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200412.csv"
+        csv_file_path = r"/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200425.csv"
     df.to_csv(csv_file_path)
     print("Results has been saved.")
 

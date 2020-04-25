@@ -14,14 +14,14 @@ sender = 'jamesqjiang@163.com'
 receivers = ['sysinfo@yuanqucha.com']
 
 content = u'请查收最新的园区政策信息'
-title = '园区政策信息_20200412'
+title = '园区政策信息_20200425'
 
 os_info = os.uname()
 if os_info.sysname == 'Darwin':
-    csv_file_path = r"/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200412.csv"
+    csv_file_path = r"/Users/qjiang/Desktop/_CURRNET_WORK/_爬虫/yqc_spider_20200425.csv"
 else:
-    csv_file_path = r"/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200412.csv"
-csv_file_name = "yqc_spider_20200412.csv"
+    csv_file_path = r"/home/james/桌面/_CURRENT_WORK/_爬虫数据/yqc_spider_20200425.csv"
+csv_file_name = "yqc_spider_20200425.csv"
 
 msg = MIMEMultipart()
 msg.attach(MIMEText('尊敬的先生/女士：  请查收最新的园区政策信息，感谢您的订阅！'))
