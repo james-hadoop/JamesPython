@@ -195,7 +195,7 @@ class JamesDeque:
         self.items.insert(0, item)
 
     def removeFont(self):
-        self.items.pop()
+        self.items# 4-3 将整数转换成以2-16为进制基数的字符串.pop()
 
     def removeRear(self):
         return self.items.pop(0)
