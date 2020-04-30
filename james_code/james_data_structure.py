@@ -195,7 +195,7 @@ class JamesDeque:
         self.items.insert(0, item)
 
     def removeFont(self):
-        self.items# 4-3 将整数转换成以2-16为进制基数的字符串.pop()
+        self.items  # 4-3 将整数转换成以2-16为进制基数的字符串.pop()
 
     def removeRear(self):
         return self.items.pop(0)
@@ -304,6 +304,23 @@ def dpMakeChange(coinValueList, change, minCoins, coinsUsed):
         coinsUsed[cents] = newCoin
 
     return minCoins[change]
+
+
+# 8-29 KMP
+def mismatchLinks(pattern):
+    augPattern = "0" + pattern
+    links = {}
+    links[1] = 0
+    for k in range(2, len(augPattern)):
+        s = links[k - 1]
+        stop = False
+        while s >= 1 and not stop:
+            if augPattern[s] == augPattern[k - 1]:
+                stop = True
+            else:
+                s = links[s]
+        links[k] = s + 1
+    return links
 
 
 def main():
