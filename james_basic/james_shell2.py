@@ -84,7 +84,7 @@ browser.get(url)
 source = browser.page_source
 time.sleep(1)
 
-targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_odd']")
+targets = browser.find_elements_by_xpath("//tr[@class='tr_main_value_even']")
 print(">>>")
 i = 0
 for t in targets:
