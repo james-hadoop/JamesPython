@@ -1,5 +1,8 @@
 import base64
+import re
 
-str2 = '[B@63f16350'
-byte = base64.decodebytes(str2.encode())
-print(byte)
+expression = 'KChrYW5kaWFuX29kc19hbGxfY29tbWVudF9jb216YW5fZC5mdGltZSA9IDIwMjAwNjA3KSBhbmQg\r\na2FuZGlhbl9vZHNfYWxsX2NvbW1lbnRfY29temFuX2Qucm93a2V5IGlzIG5vdCBudWxsKQ=='
+clean_expression = re.sub('[\s+]', '', expression)
+
+bb = base64.decodebytes(clean_expression.encode())
+print(bb.decode("utf-8"))
