@@ -16,29 +16,38 @@ config_path = os.getcwd() + '/../james_config/james_config.conf'
 CO = configobj.ConfigObj(config_path)
 
 
-def write_to_table(DB_COR, DB_CONN):
-    update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+def write_to_table(DB_COR, DB_CONN, full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table,
+                   update_time, ext):
     update_name = 'jamesqjiang'
     value = 'i am a value@' + update_time
     ext = '{}'
 
-    sql_insert = "'%s', '%s', '%s', '%s'" % (
-        update_time, update_name, value, ext)
+    """
+        INSERT INTO hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, ext) VALUES ('', '', '', '', '', '', '', '', '');
+
+    """
+    sql_insert = "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" % (
+        full_src_field, full_des_field, re.sub("\\'", 'SINGLE_QUOTE', rel), src_field, des_field, src_table, des_table, update_time, ext)
 
     execute_sql(DB_COR, DB_CONN,
-                "insert into t_ds_demo (update_time, update_name, value, ext) values (%s)" % sql_insert)
+                "INSERT INTO hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, ext) VALUES (%s)" % sql_insert)
 
 
-def read_from_table(DB_COR):
-    sql_select = "SELECT lineage_str FROM developer.hive_lineage_log where id=15;"
+def read_from_table(DB_COR, lineage_id=14):
+    sql_select = "SELECT lineage_str FROM developer.hive_lineage_log where id=%s;" % lineage_id
     results = fetch_all(DB_COR,
                         sql_select)
     return results
 
 
-def process_lineage_hook_info(lineage):
+def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
     clean_lineage = re.sub('[\s+]', '', lineage)
+    # print(clean_lineage)
+    # return
+
     data_dict = json.loads(clean_lineage)
+
+    update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     _target_table = '_NULL'
     node_set = set()
@@ -82,7 +91,11 @@ def process_lineage_hook_info(lineage):
                     str_expression = base64.decodebytes(expression.encode()).decode('utf-8')
                     ## 打印点边关系
                     print(
-                        f"{origin_column_name} -> {dest_column_name} ->@ {str_expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]}")
+                        f"{origin_column_name} -> {dest_column_name} ->@ {str_expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
+                    write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, str_expression,
+                                   origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
+                                   origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
+                                   update_time, '')
 
                     ## 画图功能，图中添加关系
                     if origin_column_name not in node_set:
@@ -121,6 +134,8 @@ def process_lineage_hook_info(lineage):
 
 
 def main():
+    lineage_id = 16
+
     DB_HOST = CO['LOCAL_DB']['host']
     DB_USER = CO['LOCAL_DB']['user']
     DB_PASSWD = CO['LOCAL_DB']['passwd']
@@ -133,11 +148,11 @@ def main():
                               charset='utf8')
 
     DB_COR = DB_CONN.cursor()
-    results = read_from_table(DB_COR)
+    results = read_from_table(DB_COR, lineage_id)
     lineage = results[0][0]
     # print(f"{lineage}")
     # print('-'*160)
-    process_lineage_hook_info(lineage)
+    process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
 
 if __name__ == '__main__':
