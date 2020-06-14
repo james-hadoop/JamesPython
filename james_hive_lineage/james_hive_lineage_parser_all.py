@@ -65,6 +65,8 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
         value = elem["vertexId"]
         vertices_dict[key] = (type, value)
 
+    vertices_dict[-99] = ('_NULL', "_NULL")
+
     # 解析边的关系
     i = 100
     j = 100
@@ -72,16 +74,23 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
     for elem in edges:
         # print(elem)
         sources = elem["sources"]
+
+        if not sources:
+            print("\t--sources is null")
+            sources = list()
+            sources.append(-99)
+            print(sources)
         targets = elem["targets"]
         edgeType = elem["edgeType"]
-        is_expression = "expression" in elem
-        # print(f"sources={sources} -> targets={targets} @ edgeType={edgeType}: is_expression={is_expression}")
 
         ## todo
         if "expression" in elem:
-            expression = elem["expression"]
+            expression = base64.decodebytes(elem["expression"].encode()).decode('utf-8')
         else:
-            expression = "_NULL"
+            expression = "NONE_TRANSFORM"
+
+        print(f"sources={sources} -> targets={targets} @ edgeType={edgeType}: expression={expression}")
+
         if edgeType == "PROJECTION":
             for target in targets:
                 if vertices_dict[target][0] == "COLUMN":
@@ -90,57 +99,23 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
                     dest_column_name = vertices_dict[target][1] + "." + expression
 
                 for source in sources:
+                    if source == -99:
+                        origin_column_name = "_NULL._NULL._NULL"
                     if vertices_dict[source][0] == "COLUMN":
                         origin_column_name = vertices_dict[source][1]
                     elif vertices_dict[source][0] == "TABLE":
                         origin_column_name = vertices_dict[source][1] + "." + expression
 
-                    if expression == "_NULL":
-                        str_expression = "_NULL"
-                    else:
-                        str_expression = base64.decodebytes(expression.encode()).decode('utf-8')
                     ## 打印点边关系
                     print(
-                        f"{origin_column_name} -> {dest_column_name} ->@ {str_expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
-                    # write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, str_expression,
-                    # origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
-                    # origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
-                    # update_time, '')
+                        f"{origin_column_name} -> {dest_column_name} ->@ {expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
+                    print("-" * 160)
 
-                    ## 画图功能，图中添加关系
-                    if origin_column_name not in node_set:
-                        nodes_data.append(
-                            opts.GraphNode(name=origin_column_name, symbol_size=10, is_fixed=True, x=100, y=100 + i))
-                        node_set.add(origin_column_name)
-                        i += 2000
-
-                    if dest_column_name not in node_set:
-                        nodes_data.append(
-                            opts.GraphNode(name=dest_column_name, symbol_size=10, is_fixed=True, x=20000, y=100 + j))
-                        node_set.add(dest_column_name)
-                        j += 2000
-
-                    links_data.append(
-                        opts.GraphLink(source=origin_column_name, target=dest_column_name,
-                                       value=expression))
-
-    # 画图
-    c = (
-        Graph(init_opts=opts.InitOpts(width="1600px", height="800px"))
-            .add(
-            "",
-            nodes_data,
-            links_data,
-            repulsion=8000,
-            edge_label=opts.LabelOpts(
-                is_show=True, position="middle", formatter="{c}"
-            )
-        )
-            .set_global_opts(
-            title_opts=opts.TitleOpts(title="james_hive_lineage_parser")
-        )
-            .render("james_hive_lineage_parser.html")
-    )
+                    ## 写数据库
+                    write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
+                                   origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
+                                   origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
+                                   update_time, '')
 
 
 def main():
@@ -162,17 +137,17 @@ def main():
     lineage = results[0][0]
     # print(f"{lineage}")
     # print('-'*160)
-    process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    # process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
-    # ### 批量解析
-    # for lineage_id in range(20, 23):
-    #     print(f"lineage_id={lineage_id}")
-    #
-    #     results = read_from_table(DB_COR, lineage_id)
-    #     lineage = results[0][0]
-    #     # print(f"{lineage}")
-    #     # print('-'*160)
-    #     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    ### 批量解析
+    for lineage_id in range(14, 23):
+        print(f"lineage_id={lineage_id}")
+
+        results = read_from_table(DB_COR, lineage_id)
+        lineage = results[0][0]
+        # print(f"{lineage}")
+        # print('-'*160)
+        process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
     return
 
