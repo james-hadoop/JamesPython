@@ -76,10 +76,10 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
         sources = elem["sources"]
 
         if not sources:
-            print("\t--sources is null")
             sources = list()
             sources.append(-99)
-            print(sources)
+            # print("\t--sources is null")
+            # print(sources)
         targets = elem["targets"]
         edgeType = elem["edgeType"]
 
@@ -89,7 +89,7 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
         else:
             expression = "NONE_TRANSFORM"
 
-        print(f"sources={sources} -> targets={targets} @ edgeType={edgeType}: expression={expression}")
+        # print(f"sources={sources} -> targets={targets} @ edgeType={edgeType}: expression={expression}")
 
         if edgeType == "PROJECTION":
             for target in targets:
@@ -109,13 +109,12 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
                     ## 打印点边关系
                     print(
                         f"{origin_column_name} -> {dest_column_name} ->@ {expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
-                    print("-" * 160)
 
-                    ## 写数据库
-                    write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
-                                   origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
-                                   origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
-                                   update_time, '')
+                    # ## 写数据库
+                    # write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
+                    #                origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
+                    #                origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
+                    #                update_time, '')
 
 
 def main():
@@ -132,22 +131,22 @@ def main():
 
     DB_COR = DB_CONN.cursor()
 
-    lineage_id = 14
+    lineage_id = 1
     results = read_from_table(DB_COR, lineage_id)
     lineage = results[0][0]
     # print(f"{lineage}")
     # print('-'*160)
-    # process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
-    ### 批量解析
-    for lineage_id in range(14, 23):
-        print(f"lineage_id={lineage_id}")
-
-        results = read_from_table(DB_COR, lineage_id)
-        lineage = results[0][0]
-        # print(f"{lineage}")
-        # print('-'*160)
-        process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    # ### 批量解析
+    # for lineage_id in range(1, 11):
+    #     print(f"lineage_id={lineage_id}")
+    #
+    #     results = read_from_table(DB_COR, lineage_id)
+    #     lineage = results[0][0]
+    #     # print(f"{lineage}")
+    #     # print('-'*160)
+    #     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
     return
 
