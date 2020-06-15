@@ -50,7 +50,7 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
 
     update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    _target_table = '_NULL'
+    # _target_table = '_NULL'
     node_set = set()
     nodes_data = []
     links_data = []
@@ -65,7 +65,7 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
         value = elem["vertexId"]
         vertices_dict[key] = (type, value)
 
-    vertices_dict[-99] = ('_NULL', "_NULL")
+    vertices_dict[-99] = ('USER_DEFINE', "USER_DEFINE")
 
     # 解析边的关系
     i = 100
@@ -100,7 +100,7 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
 
                 for source in sources:
                     if source == -99:
-                        origin_column_name = "_NULL._NULL._NULL"
+                        origin_column_name = "USER_DEFINE.USER_DEFINE.USER_DEFINE"
                     if vertices_dict[source][0] == "COLUMN":
                         origin_column_name = vertices_dict[source][1]
                     elif vertices_dict[source][0] == "TABLE":
@@ -110,11 +110,11 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
                     print(
                         f"{origin_column_name} -> {dest_column_name} ->@ {expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
 
-                    # ## 写数据库
-                    # write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
-                    #                origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
-                    #                origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
-                    #                update_time, '')
+                    ## 写数据库
+                    write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
+                                   origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
+                                   origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
+                                   update_time, '')
 
 
 def main():
@@ -138,15 +138,15 @@ def main():
     # print('-'*160)
     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
-    # ### 批量解析
-    # for lineage_id in range(1, 11):
-    #     print(f"lineage_id={lineage_id}")
-    #
-    #     results = read_from_table(DB_COR, lineage_id)
-    #     lineage = results[0][0]
-    #     # print(f"{lineage}")
-    #     # print('-'*160)
-    #     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    ### 批量解析
+    for lineage_id in range(14, 23):
+        print(f"lineage_id={lineage_id}")
+
+        results = read_from_table(DB_COR, lineage_id)
+        lineage = results[0][0]
+        # print(f"{lineage}")
+        # print('-'*160)
+        process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
     return
 
