@@ -65,7 +65,7 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
         value = elem["vertexId"]
         vertices_dict[key] = (type, value)
 
-    vertices_dict[-99] = ('USER_DEFINE', "USER_DEFINE")
+    vertices_dict[-99] = ('_USER_DEFINE', "_USER_DEFINE")
 
     # 解析边的关系
     i = 100
@@ -100,7 +100,7 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
 
                 for source in sources:
                     if source == -99:
-                        origin_column_name = "USER_DEFINE.USER_DEFINE.USER_DEFINE"
+                        origin_column_name = "_USER_DEFINE._USER_DEFINE._USER_DEFINE"
                     if vertices_dict[source][0] == "COLUMN":
                         origin_column_name = vertices_dict[source][1]
                     elif vertices_dict[source][0] == "TABLE":
@@ -139,6 +139,7 @@ def main():
     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
     ### 批量解析
+    # for lineage_id in range(14, 23):
     for lineage_id in range(14, 23):
         print(f"lineage_id={lineage_id}")
 
