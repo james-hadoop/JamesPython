@@ -52,8 +52,8 @@ if __name__ == "__main__":
 
     results = read_from_table(DB_COR, None)
     rels = [
-        'CREATE (src:Field {full_src_field:"%s",src_field:"%s",src_table:"%s"}),(des:Field {full_des_field:"%s",des_field:"%s",des_table:"%s"}),(src)-[:%s]->(des)' % (
-            rel[0], rel[1], rel[2], rel[3], rel[4], rel[5], "转换") for rel in
+        'CREATE (src:Field {name:"%s",full_src_field:"%s",src_field:"%s",src_table:"%s"}),(des:Field {name:"%s",full_des_field:"%s",des_field:"%s",des_table:"%s"}),(src)-[:%s]->(des)' % (
+            rel[0], rel[0], rel[1], rel[2], rel[3], rel[3], rel[4], rel[5], "转换") for rel in
         results]
     for rel in rels:
         print(rel)
