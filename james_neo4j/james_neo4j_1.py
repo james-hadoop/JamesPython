@@ -8,9 +8,10 @@ from neo4j import GraphDatabase, basic_auth
 app = Flask(__name__, static_url_path='/static/')
 
 url = os.getenv("NEO4J_URL", "bolt://localhost")
-password = os.getenv("NEO4J_PASSWORD", "test")
+username = os.getenv("NEO4J_USERNAME", "james")
+password = os.getenv("NEO4J_PASSWORD", "james")
 
-driver = GraphDatabase.driver(url, auth=basic_auth("james", "james"), encrypted=False)
+driver = GraphDatabase.driver(url, auth=basic_auth(username, password), encrypted=False)
 
 
 def get_db():

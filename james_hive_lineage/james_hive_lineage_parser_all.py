@@ -131,16 +131,16 @@ def main():
 
     DB_COR = DB_CONN.cursor()
 
-    lineage_id = 1
-    results = read_from_table(DB_COR, lineage_id)
-    lineage = results[0][0]
+    # lineage_id = 1
+    # results = read_from_table(DB_COR, lineage_id)
+    # lineage = results[0][0]
     # print(f"{lineage}")
     # print('-'*160)
-    process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    # process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
     ### 批量解析
     # for lineage_id in range(14, 23):
-    for lineage_id in range(14, 23):
+    for lineage_id in range(14, 22):
         print(f"lineage_id={lineage_id}")
 
         results = read_from_table(DB_COR, lineage_id)
