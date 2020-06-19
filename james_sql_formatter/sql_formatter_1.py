@@ -3,19 +3,17 @@ import re
 import sqlparse
 
 sql = """
-select field_1, field_2, cast(date_format(case when length(sale_date) > 10 then substring(sale_date,
-                                                     1,
-                                                     10) else sale_date end, 'u') as int),
-                                                     SUM(field_3)  as field_3, max(field_2)
-from my_table
-left join (Select field_2, sum(field_1) From (Select field_2, field_1 From another_table) as b group by field_2) as sub_table_on on my_table.field_2 = sub_table.field_2
-left join table_three on my_table.field_1 = table_three.field_1
-group by field_1, field_2 order by field_1 desc
+INSERT INTO 
+
+kandian_ods_video_core_d 
+                    SELECT 20200608 AS ftime, rowkey, SUM(onetothree_expose) 
+            AS onetothree_expose , SUM(onetothree_vv) AS onetothree_vv, SUM(tot_vv) AS tot_vv , SUM(tot_vv_incwesee) AS tot_vv_incwesee, AVG(mediaduration) AS mediaduration , SUM(sum_watchduration) / SUM(tot_vv) AS watchduration , AVG(watchduration) / AVG(mediaduration) AS watchratio , CASE  WHEN SUM(tot_vv) > 100 THEN SUM(valid_vv) / SUM(tot_vv) ELSE NULL END AS valid_ratio, SUM(valid_vv) AS valid_vv FROM kandian_ods_video_core_h WHERE fhour BETWEEN 2020060800 AND 2020060823 AND rowkey RLIKE '[0-9a-zA-Z]+' GROUP BY rowkey;
+
 """
 
-ret = sqlparse.format(sql, reindent=True, keyword_case='upper')
+sql_format = sqlparse.format(sql, reindent=True, keyword_case='upper')
 
-print(ret)
-ret_compact = ' '.join(ret.split())
+print(sql_format)
+sql_compact = ' '.join(sql_format.split())
 print("-" * 160)
-print(ret_compact)
+print(sql_compact)
