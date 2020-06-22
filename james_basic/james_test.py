@@ -16,5 +16,40 @@ list_str=["0", "\tapplication_1589888927865_11666447:\nStage 0 succeeded:\n  Num
 print(list_str)
 print(list_str[0])
 
+sql_format="""
+INSERT INTO t_dwt_consume_video_rowkeyperformance_normal_d
+SELECT 20200607 AS ftime,
+       'kd' AS sp_app_id,
+       rowkey AS rowkey,
+       NULL AS video_type,
+       baoguang_cnt AS maintl_exp_cnt,
+       main_click AS maintl_click_cnt,
+       onetothree_expose AS floatlayer_exp_cnt,
+       onetothree_vv AS floatlayer_vv,
+       videochn_expose AS videochann_exp_cnt,
+       videochn_click AS videochann_click_cnt,
+       kddaily_expose AS infkddaily_exp_cnt,
+       kddaily_click AS infkddaily_click_cnt,
+       video_vv AS total_vv,
+       valid_vv AS valid_vv,
+       dianzan_cnt AS like_cnt,
+       share_cnt AS share_cnt,
+       biu_cnt AS biu_cnt,
+       main_comment AS mainclass_cmt_cnt,
+       main_comment_zan AS mainclass_cmtlike_cnt,
+       sub_comment AS sub2class_cmt_cnt,
+       sub_comment_zan AS sub2class_like_cnt,
+       NULL AS collect_cnt,
+       NULL AS accuse_cnt,
+       NULL AS negfeeback_cnt,
+       CAST(FLOOR(tot_watch_duration) AS BIGINT) AS duration_video
+FROM sng_mediaaccount_app.kandian_video_medium_full_info_d
+WHERE ftime = 20200607
+"""
+
+base64_encode = base64.encodebytes(sql_format.encode())
+base64_decode = base64.decodebytes(base64_encode)
+print(str(base64_decode))
+
 
 
