@@ -132,3 +132,5 @@ ENV/
 /_data
 
 /py_kd_data_common_proj
+
+/james_hive_lineage/_data
