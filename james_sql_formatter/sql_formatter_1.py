@@ -361,3 +361,5 @@ print(sql_format)
 sql_compact = ' '.join(sql_format.split())
 print("-" * 160)
 print(sql_compact)
+
+sqlparse.v
