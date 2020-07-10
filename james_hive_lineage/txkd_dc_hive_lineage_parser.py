@@ -1,4 +1,5 @@
 import datetime
+import sys
 
 import configobj
 import pymysql
@@ -27,10 +28,23 @@ def write_to_table(DB_COR, DB_CONN, full_src_field, full_des_field, rel, src_fie
         INSERT INTO txkd_dc_hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, sql_format, hive_lineage_log_id, ext) VALUES ('', '', '', '', '', '', '', '', '', '', '');
 
     """
+
+    convert_rel = rel.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_full_src_field = full_src_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
+                                                                                                            "TOK_COMMA")
+    convert_full_des_field = full_des_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
+                                                                                                            "TOK_COMMA")
+    convert_src_field = src_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_des_field = des_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+
     sql_insert = "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" % (
-        full_src_field, full_des_field, re.sub("\\'", 'SINGLE_QUOTE', rel), src_field, des_field, src_table, des_table,
+        convert_full_src_field, convert_full_des_field,
+        convert_rel, convert_src_field,
+        convert_des_field, src_table, des_table,
         update_time, sql_format, hive_lineage_log_id, ext)
 
+    print(
+        f"----------------------------\nrel={convert_rel} \n\nfull_src_field={convert_full_src_field} \n\nfull_des_field={convert_full_des_field}")
     execute_sql(DB_COR, DB_CONN,
                 "INSERT INTO txkd_dc_hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, sql_format, hive_lineage_log_id, ext) VALUES (%s)" % sql_insert)
 
@@ -121,11 +135,11 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
                     sql_format = sqlparse.format(query_sql, reindent=True, keyword_case='upper')
                     print(f"\t{sql_format}")
 
-                    # ## 写数据库
-                    # write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
-                    #                origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
-                    #                origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
-                    #                update_time, sql_format, hive_lineage_log_id, '')
+                    ## 写数据库
+                    write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
+                                   origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
+                                   origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
+                                   update_time, sql_format, id, '')
 
 
 def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_CONN):
@@ -198,15 +212,33 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
                         f"{origin_column_name} -> {dest_column_name} ->@ {expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
                     print('-' * 160)
                     print(f"\t{query_sql}")
-                    # sql_format = sqlparse.format(query_sql, reindent=True, keyword_case='upper')
-                    # sql_base64_encode = base64.encodebytes(sql_format.encode())
-                    # print(f"{sql_base64_encode}")
+
+                    sql_format = sqlparse.format(query_sql, reindent=True, keyword_case='upper')
+                    sql_base64_encode = base64.encodebytes(sql_format.encode())
+                    print(f"{sql_base64_encode}")
+
+                    origin_column_name = origin_column_name.replace("'", "SINGLE_QUOTE").replace("$",
+                                                                                                 "TOK_DOLLAR").replace(
+                        ",", "TOK_COMMA")
+                    dest_column_name = dest_column_name.replace("'", "SINGLE_QUOTE").replace("$",
+                                                                                             "TOK_DOLLAR").replace(
+                        ",", "TOK_COMMA")
+                    expression = expression.replace("'", "SINGLE_QUOTE").replace("$",
+                                                                                 "TOK_DOLLAR").replace(
+                        ",", "TOK_COMMA")
+                    sql_format = str(sql_format).replace("'", "SINGLE_QUOTE").replace("$",
+                                                                                      "TOK_DOLLAR").replace(
+                        ",", "TOK_COMMA")
+
+                    print(f"origin_column_name={origin_column_name}")
+                    print(f"dest_column_name={dest_column_name}")
+                    print(f"expression={expression}")
 
                     ## 写数据库
                     write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
                                    origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
                                    origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
-                                   update_time, re.sub("\\'", 'SINGLE_QUOTE', query_sql), hive_lineage_log_id, '')
+                                   update_time, sql_format, hive_lineage_log_id, '')
 
 
 def main():
@@ -223,7 +255,7 @@ def main():
 
     DB_COR = DB_CONN.cursor()
 
-    lineage_id = 2
+    lineage_id = 190
     results = read_from_table(DB_COR, lineage_id)
     lineage = results[0][0]
     print(f"{lineage}")
@@ -232,16 +264,16 @@ def main():
 
     # ### 批量解析
     # # for lineage_id in range(14, 23):
-    # for lineage_id in range(14, 22):
+    # for lineage_id in range(1, 1000):
     #     print(f"lineage_id={lineage_id}")
     #
     #     results = read_from_table(DB_COR, lineage_id)
     #     lineage = results[0][0]
     #     # print(f"{lineage}")
     #     # print('-'*160)
-    #     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    #     process_txkd_dc_hive_lineage_info(lineage, lineage_id, DB_COR, DB_CONN)
 
-    return
+    sys.exit(0)
 
 
 if __name__ == '__main__':
