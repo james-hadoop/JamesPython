@@ -8,8 +8,6 @@ def composeDdl(db_name, table_name, columns):
 
     return dbDdl + tableDllPrefix + columns + tableDdlPostfix
 
-    pass
-
 
 def makeDdl():
     ddlList = []

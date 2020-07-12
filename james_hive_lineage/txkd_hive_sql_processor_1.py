@@ -17,11 +17,14 @@ config_path = os.getcwd() + '/../james_config/james_config.conf'
 CO = configobj.ConfigObj(config_path)
 
 
+## 清除注释
 def clean_sql_comments(sql):
     sql_out = re.subn('\-\-.*?TOK_BACKSLASH_N', 'TOK_BACKSLASH_N', sql)[0]
 
     return sql_out
 
+
+## 为date_sub()函数增加单引号
 def add_quote_on_date(sql):
     rs = re.findall(r'''date_sub(\(\s*([0-9]{8})\s*\,)''', sql)
     if rs is not None:
@@ -30,6 +33,7 @@ def add_quote_on_date(sql):
 
     return sql
 
+
 def read_from_table(DB_COR, id=1):
     sql_select = "SELECT sql_str FROM developer.txkd_dc_hive_sql where id=%s;" % id
     results = fetch_all(DB_COR,
@@ -37,7 +41,7 @@ def read_from_table(DB_COR, id=1):
     return results
 
 
-def write_to_table(DB_COR, DB_CONN, sql_user, sql_db, sql_group, sql_str):
+def write_to_table(DB_COR, DB_CONN, mysql_table, sql_user, sql_db, sql_group, sql_str):
     ext = '{}'
 
     # """
@@ -54,10 +58,10 @@ def write_to_table(DB_COR, DB_CONN, sql_user, sql_db, sql_group, sql_str):
     sql_insert = "'%s', '%s', '%s', '%s'" % (sql_user, sql_db, sql_group, sql_str)
 
     execute_sql(DB_COR, DB_CONN,
-                "INSERT INTO txkd_dc_hive_sql_focus (username, dbname, groupname, sql_str) VALUES (%s)" % sql_insert)
+                "INSERT INTO %s (username, dbname, groupname, sql_str) VALUES (%s)" % (mysql_table, sql_insert))
 
 
-def process_sql(sql_file):
+def process_sql(sql_file, mysql_table):
     update_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     file = open(sql_file, 'r')
 
@@ -75,8 +79,8 @@ def process_sql(sql_file):
                 print(line)
                 try:
                     (sql_user, sql_db, sql_group, sql_str) = line.split("；")
-                    sql_str=add_quote_on_date(sql_str)
-                    write_to_table(DB_COR, DB_CONN, sql_user, sql_db, sql_group, " ".join(sql_str.split()))
+                    sql_str = add_quote_on_date(sql_str)
+                    write_to_table(DB_COR, DB_CONN, mysql_table, sql_user, sql_db, sql_group, " ".join(sql_str.split()))
                     # print(f"sql_user={sql_user}, sql_db={sql_db}, sql_group={sql_group}")
                     # print(" ".join(sql_str.split()).replace('HEIHEIHEIAABBCC', 'TOK_BACKSLASH_N'))
                 except ValueError as err:
@@ -86,8 +90,8 @@ def process_sql(sql_file):
     finally:
         file.close()
 
-    print(f"cnt={cnt}")
-    print(f"errCnt={errCnt}")
+    # print(f"cnt={cnt}")
+    # print(f"errCnt={errCnt}")
 
     # ## readline()
     # cnt = 10
@@ -113,14 +117,10 @@ def convert_tdw_sql_to_hive_sql(sql):
 
 
 def main():
-    sql_file = './_data/t_dim_fcc_b_article_rowkey_acc_d.txt'
-    process_sql(sql_file)
+    sql_file = './_data/txkd_dc_sql_300s.sql'
+    mysql_table = 'txkd_dc_hive_sql_focus'
 
-    # id = 1
-    # results = read_from_table(DB_COR, id)
-    # record = results[0][0]
-    # print(f"{record}")
-    # print('-' * 160)
+    process_sql(sql_file, mysql_table)
 
 
 if __name__ == '__main__':
