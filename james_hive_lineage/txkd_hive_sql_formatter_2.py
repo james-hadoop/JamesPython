@@ -17,7 +17,8 @@ from py_kd_data_common_proj.ds_utils.ds_pymysql_util import fetch_all, execute_s
 
 
 def read_from_table(DB_COR):
-    sql_select = "SELECT sql_str FROM developer.txkd_dc_hive_sql_focus"
+    sql_select = "SELECT sql_str, dbname FROM developer.txkd_dc_hive_sql_focus limit 2"
+    sql_select = "SELECT sql_str, dbname FROM developer.txkd_dc_hive_sql_focus"
     results = fetch_all(DB_COR,
                         sql_select)
     return results
@@ -74,23 +75,43 @@ def solve_less_alias_problem(sql):
     return sql
 
 
+# 删除partion子句
+def remove_partition_part(sql):
+    sql = re.sub(r"(?i)(partition\s*\(\s*\w*\s*=\s*\w*\s*\))", " ", sql)
+
+    return sql
+
+
+# 删除overwrite子句
+def remove_overwrite_table(sql):
+    sql = re.sub(r"""(?i)OVERWRITE\s*[INTO]*\s*TABLE""", " INTO ", sql)
+
+    return sql
+
+
 def validate_sql():
     results = read_from_table(DB_COR)
 
-    sql_list = [[item[0]] for item in results]
+    sql_list = [[item[0], item[1]] for item in results]
 
     with open("/Users/qjiang/workspace4py/JamesPython/james_hive_lineage/_log/txkd_hive_sql_formatter_2.sql",
               "a+") as f:
         for s in sql_list:
+            db = s[1]
             sql = str(s[0]).replace("TOK_SINGLE_QUOTE", "'").replace("TOK_BACKSLASH_N", " ").replace("::", ".").replace(
-                "INSERT OVERWRITE TABLE", "INSERT INTO").replace("INSERT TABLE", "INSERT INTO") + ";"
+                "INSERT OVERWRITE TABLE", "INSERT INTO").replace("INSERT TABLE", "INSERT INTO")
+            sql = sql + ";"
             sql = sqlparse.format(sql, reindent=True, keyword_case='upper')
             sql = " ".join(sql.split())
             sql = solve_less_alias_problem(sql)
             sql = add_quote_on_date_for_DATE_ADD(sql)
             sql = add_quote_on_date_for_DATE_SUB(sql)
+            sql = remove_partition_part(sql)
+            sql = remove_overwrite_table(sql)
+
             sql = mysql2sql(sql)
-            f.write(sql+"\n")
+            f.write("use " + db + ";" + sql + "\n")
+            # f.write(db + "；" + sql + "\n")
 
 
 def main():

@@ -255,23 +255,23 @@ def main():
 
     DB_COR = DB_CONN.cursor()
 
-    lineage_id = 190
-    results = read_from_table(DB_COR, lineage_id)
-    lineage = results[0][0]
-    print(f"{lineage}")
-    print('-' * 160)
-    process_txkd_dc_hive_lineage_info(lineage, lineage_id, DB_COR, DB_CONN)
+    # lineage_id = 190
+    # results = read_from_table(DB_COR, lineage_id)
+    # lineage = results[0][0]
+    # print(f"{lineage}")
+    # print('-' * 160)
+    # process_txkd_dc_hive_lineage_info(lineage, lineage_id, DB_COR, DB_CONN)
 
-    # ### 批量解析
-    # # for lineage_id in range(14, 23):
-    # for lineage_id in range(1, 1000):
-    #     print(f"lineage_id={lineage_id}")
-    #
-    #     results = read_from_table(DB_COR, lineage_id)
-    #     lineage = results[0][0]
-    #     # print(f"{lineage}")
-    #     # print('-'*160)
-    #     process_txkd_dc_hive_lineage_info(lineage, lineage_id, DB_COR, DB_CONN)
+    ### 批量解析
+    # for lineage_id in range(1, 23):
+    for lineage_id in range(1, 244):
+        print(f"lineage_id={lineage_id}")
+
+        results = read_from_table(DB_COR, lineage_id)
+        lineage = results[0][0]
+        # print(f"{lineage}")
+        # print('-'*160)
+        process_txkd_dc_hive_lineage_info(lineage, lineage_id, DB_COR, DB_CONN)
 
     sys.exit(0)
 
