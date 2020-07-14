@@ -17,11 +17,13 @@ config_path = os.getcwd() + '/../james_config/james_config.conf'
 CO = configobj.ConfigObj(config_path)
 
 
+## 清除注释
 def clean_sql_comments(sql):
     sql_out = re.subn('\-\-.*?TOK_BACKSLASH_N', 'TOK_BACKSLASH_N', sql)[0]
 
     return sql_out
 
+## 为date_sub()函数增加单引号
 def add_quote_on_date(sql):
     rs = re.findall(r'''date_sub(\(\s*([0-9]{8})\s*\,)''', sql)
     if rs is not None:
@@ -75,7 +77,7 @@ def process_sql(sql_file):
                 print(line)
                 try:
                     (sql_user, sql_db, sql_group, sql_str) = line.split("；")
-                    sql_str=add_quote_on_date(sql_str)
+                    sql_str = add_quote_on_date(sql_str)
                     write_to_table(DB_COR, DB_CONN, sql_user, sql_db, sql_group, " ".join(sql_str.split()))
                     # print(f"sql_user={sql_user}, sql_db={sql_db}, sql_group={sql_group}")
                     # print(" ".join(sql_str.split()).replace('HEIHEIHEIAABBCC', 'TOK_BACKSLASH_N'))
@@ -86,8 +88,8 @@ def process_sql(sql_file):
     finally:
         file.close()
 
-    print(f"cnt={cnt}")
-    print(f"errCnt={errCnt}")
+    # print(f"cnt={cnt}")
+    # print(f"errCnt={errCnt}")
 
     # ## readline()
     # cnt = 10
@@ -113,7 +115,7 @@ def convert_tdw_sql_to_hive_sql(sql):
 
 
 def main():
-    sql_file = './_data/t_dim_fcc_b_article_rowkey_acc_d.txt'
+    sql_file = './_data/txkd_dc_sql_300s.sql'
     process_sql(sql_file)
 
     # id = 1

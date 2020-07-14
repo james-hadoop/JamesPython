@@ -19,7 +19,7 @@ CO = configobj.ConfigObj(config_path)
 
 
 def read_from_table(DB_COR, id):
-    sql_select = "SELECT full_src_field, src_field, src_table, full_des_field, des_field, des_table, rel FROM developer.txkd_dc_hive_lineage_rel_prod"
+    sql_select = "SELECT distinct src_table, des_table, '表关系' as rel FROM developer.txkd_dc_hive_lineage_rel_prod"
 
     if id:
         sql_select = sql_select + " where id = % s;" % id
@@ -52,8 +52,8 @@ if __name__ == "__main__":
 
     results = read_from_table(DB_COR, None)
     rels = [
-        'CREATE (src:Field {name:"%s",full_src_field:"%s",src_field:"%s",src_table:"%s"}),(des:Field {name:"%s",full_des_field:"%s",des_field:"%s",des_table:"%s"}),(src)-[:%s]->(des)' % (
-            rel[0], rel[0], rel[1], rel[2], rel[3], rel[3], rel[4], rel[5], "转换") for rel in
+        'CREATE (src:Field {name:"%s",src_table:"%s"}),(des:Field {name:"%s",des_table:"%s"}),(src)-[:%s]->(des)' % (
+            rel[0], rel[0], rel[1], rel[1], "表关系") for rel in
         results]
     for rel in rels:
         print(rel)
