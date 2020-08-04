@@ -1,3 +1,4 @@
+# coding:utf-8
 import datetime
 import sys
 
@@ -29,13 +30,13 @@ def write_to_table(DB_COR, DB_CONN, full_src_field, full_des_field, rel, src_fie
 
     """
 
-    convert_rel = rel.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
-    convert_full_src_field = full_src_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
+    convert_rel = rel.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_full_src_field = full_src_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
                                                                                                             "TOK_COMMA")
-    convert_full_des_field = full_des_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
+    convert_full_des_field = full_des_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
                                                                                                             "TOK_COMMA")
-    convert_src_field = src_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
-    convert_des_field = des_field.replace("'", "SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_src_field = src_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_des_field = des_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
 
     sql_insert = "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" % (
         convert_full_src_field, convert_full_des_field,
@@ -49,7 +50,7 @@ def write_to_table(DB_COR, DB_CONN, full_src_field, full_des_field, rel, src_fie
                 "INSERT INTO txkd_dc_hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, sql_format, hive_lineage_log_id, ext) VALUES (%s)" % sql_insert)
 
 
-def read_from_table(DB_COR, lineage_id=14):
+def read_from_table(DB_COR, lineage_id=246):
     sql_select = "SELECT lineage_str FROM developer.txkd_dc_hive_lineage_log where id=%s;" % lineage_id
     results = fetch_all(DB_COR,
                         sql_select)
@@ -211,22 +212,22 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
                     print(
                         f"{origin_column_name} -> {dest_column_name} ->@ {expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
                     print('-' * 160)
-                    print(f"\t{query_sql}")
+                    # print(f"\t{query_sql}")
 
                     sql_format = sqlparse.format(query_sql, reindent=True, keyword_case='upper')
                     sql_base64_encode = base64.encodebytes(sql_format.encode())
-                    print(f"{sql_base64_encode}")
+                    # print(f"{sql_base64_encode}")
 
-                    origin_column_name = origin_column_name.replace("'", "SINGLE_QUOTE").replace("$",
+                    origin_column_name = origin_column_name.replace("'", "TOK_SINGLE_QUOTE").replace("$",
                                                                                                  "TOK_DOLLAR").replace(
                         ",", "TOK_COMMA")
-                    dest_column_name = dest_column_name.replace("'", "SINGLE_QUOTE").replace("$",
+                    dest_column_name = dest_column_name.replace("'", "TOK_SINGLE_QUOTE").replace("$",
                                                                                              "TOK_DOLLAR").replace(
                         ",", "TOK_COMMA")
-                    expression = expression.replace("'", "SINGLE_QUOTE").replace("$",
+                    expression = expression.replace("'", "TOK_SINGLE_QUOTE").replace("$",
                                                                                  "TOK_DOLLAR").replace(
                         ",", "TOK_COMMA")
-                    sql_format = str(sql_format).replace("'", "SINGLE_QUOTE").replace("$",
+                    sql_format = str(sql_format).replace("'", "TOK_SINGLE_QUOTE").replace("$",
                                                                                       "TOK_DOLLAR").replace(
                         ",", "TOK_COMMA")
 
@@ -255,7 +256,8 @@ def main():
 
     DB_COR = DB_CONN.cursor()
 
-    # lineage_id = 190
+    # # 解析单条点边关系
+    # lineage_id = 246
     # results = read_from_table(DB_COR, lineage_id)
     # lineage = results[0][0]
     # print(f"{lineage}")
@@ -264,7 +266,7 @@ def main():
 
     ### 批量解析
     # for lineage_id in range(1, 23):
-    for lineage_id in range(1, 244):
+    for lineage_id in range(1, 2398):
         print(f"lineage_id={lineage_id}")
 
         results = read_from_table(DB_COR, lineage_id)
