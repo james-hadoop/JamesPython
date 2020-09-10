@@ -39,7 +39,7 @@ def mysql2sql(sql):
                                                                                                                "`type`").replace(
         "interval", "`interval`").replace("INSERT OVERWRITE INTO TABLE", "INSERT INTO").replace("INSERT INTO TABLE",
                                                                                                 "INSERT INTO").replace(
-        ") GROUP BY", ") t_james_temp GROUP BY")
+        ") GROUP BY", ") t_alias_tt GROUP BY")
 
 
 def sql2mysql(sql):
@@ -51,7 +51,7 @@ def solve_less_alias_problem(sql):
     rs = re.findall(r'''(\)\)\s{1,5}(\w{1,20}))\s{1,5}ON''', sql)
     if rs is not None:
         for t in rs:
-            sql = sql.replace(t[0], ') t_james_temp) ' + t[1])
+            sql = sql.replace(t[0], ') t_alias_tt) ' + t[1])
     return sql
 
 

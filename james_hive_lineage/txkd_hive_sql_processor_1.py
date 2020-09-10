@@ -1,3 +1,4 @@
+# coding:utf-8
 import datetime
 import re
 import datetime
@@ -102,7 +103,7 @@ def process_sql(sql_file, mysql_table):
     #         line = file.readline()
     #         if line:
     #             re.sub('[\s+]', ' ', line)
-    #             sql_str = re.sub("\\'", 'SINGLE_QUOTE', " ".join(line.split()))
+    #             sql_str = re.sub("\\'", 'TOK_SINGLE_QUOTE', " ".join(line.split()))
     #             print(">>> " + sql_str)
     #             write_to_table(DB_COR, DB_CONN, sql_str, update_time)
     #         else:
@@ -117,8 +118,8 @@ def convert_tdw_sql_to_hive_sql(sql):
 
 
 def main():
-    sql_file = './_data/txkd_dc_sql_300s.sql'
-    mysql_table = 'txkd_dc_hive_sql_focus'
+    sql_file = './_data/txkd_dc_sql_60_big.txt'
+    mysql_table = 'txkd_dc_hive_sql_focus_all'
 
     process_sql(sql_file, mysql_table)
 

@@ -1,3 +1,4 @@
+# coding:utf-8
 import datetime
 
 import configobj
@@ -6,6 +7,7 @@ import json
 import os
 import re
 import base64
+import sys
 
 from pyecharts import options as opts
 from pyecharts.charts import Graph
@@ -110,11 +112,11 @@ def process_lineage_hook_info(lineage, DB_COR, DB_CONN):
                     print(
                         f"{origin_column_name} -> {dest_column_name} ->@ {expression} << {origin_column_name.rsplit('.', 1)[0]} -> {dest_column_name.rsplit('.', 1)[0]} << {origin_column_name.rsplit('.', 1)[1]} -> {dest_column_name.rsplit('.', 1)[1]}")
 
-                    ## 写数据库
-                    write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
-                                   origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
-                                   origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
-                                   update_time, '')
+                    # ## 写数据库
+                    # write_to_table(DB_COR, DB_CONN, origin_column_name, dest_column_name, expression,
+                    #                origin_column_name.rsplit('.', 1)[1], dest_column_name.rsplit('.', 1)[1],
+                    #                origin_column_name.rsplit('.', 1)[0], dest_column_name.rsplit('.', 1)[0],
+                    #                update_time, '')
 
 
 def main():
@@ -131,26 +133,28 @@ def main():
 
     DB_COR = DB_CONN.cursor()
 
-    # lineage_id = 1
-    # results = read_from_table(DB_COR, lineage_id)
-    # lineage = results[0][0]
-    # print(f"{lineage}")
-    # print('-'*160)
-    # process_lineage_hook_info(lineage, DB_COR, DB_CONN)
+    lineage_id = 100
+    results = read_from_table(DB_COR, lineage_id)
+    lineage = results[0][0]
+    print(f"{lineage}")
+    print('-'*160)
+    process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
-    ### 批量解析
-    # for lineage_id in range(14, 23):
-    for lineage_id in range(14, 22):
-        print(f"lineage_id={lineage_id}")
+    # ### 批量解析
+    # # for lineage_id in range(14, 23):
+    # for lineage_id in range(14, 22):
+    #     print(f"lineage_id={lineage_id}")
+    #
+    #     results = read_from_table(DB_COR, lineage_id)
+    #     lineage = results[0][0]
+    #     # print(f"{lineage}")
+    #     # print('-'*160)
+    #     process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
-        results = read_from_table(DB_COR, lineage_id)
-        lineage = results[0][0]
-        # print(f"{lineage}")
-        # print('-'*160)
-        process_lineage_hook_info(lineage, DB_COR, DB_CONN)
 
-    return
 
 
 if __name__ == '__main__':
     main()
+
+    sys.exit(0)

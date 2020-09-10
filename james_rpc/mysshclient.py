@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
-#!/usr/local/bin/python
-#Time: 2018/8/23 21:45:03
-#Description: 
-#File Name: mysshclient.py
- 
+# !/usr/local/bin/python
+# Time: 2018/8/23 21:45:03
+# Description:
+# File Name: mysshclient.py
+
 import paramiko
 from chardet.universaldetector import UniversalDetector
+
 detector = UniversalDetector()
 
 conf = {
-'192.168.164.41':('dsadm','dsadm'),
-'192.168.164.40':('edw','edw'),
+    '192.168.164.41': ('dsadm', 'dsadm'),
+    '192.168.164.40': ('edw', 'edw'),
 }
+
 
 class SSHConnection(object):
     def __init__(self, host, port):
@@ -23,25 +25,25 @@ class SSHConnection(object):
         self._sftp = None
         self._client = None
         self._connect()  # 建立连接
- 
+
     def _connect(self):
         transport = paramiko.Transport((self._host, self._port))
         transport.connect(username=self._username, password=self._password)
         self._transport = transport
- 
-    #下载
+
+    # 下载
     def download(self, remotepath, localpath):
         if self._sftp is None:
             self._sftp = paramiko.SFTPClient.from_transport(self._transport)
         self._sftp.get(remotepath, localpath)
- 
-    #上传
+
+    # 上传
     def put(self, localpath, remotepath):
         if self._sftp is None:
             self._sftp = paramiko.SFTPClient.from_transport(self._transport)
         self._sftp.put(localpath, remotepath)
- 
-    #执行命令
+
+    # 执行命令
     def exec_command(self, command):
         if self._client is None:
             self._client = paramiko.SSHClient()
@@ -54,17 +56,17 @@ class SSHConnection(object):
                 print(data.decode('utf-8').strip())
             except UnicodeDecodeError:
                 print(data.decode('gbk').strip())
-            #return data
+            # return data
         err = stderr.read()
         if len(err) > 0:
             try:
                 print(err.decode('utf-8').strip())
             except UnicodeDecodeError:
                 print(err.decode('gbk').strip())
-            #return err
-        #print("返回值：",returncode)
-        return(returncode)
- 
+            # return err
+        # print("返回值：",returncode)
+        return (returncode)
+
     def close(self):
         if self._transport:
             self._transport.close()
@@ -72,12 +74,13 @@ class SSHConnection(object):
             self._client.close()
 
 
-def run_ssh_command(ip,command):
-    conn = SSHConnection(ip,22)
+def run_ssh_command(ip, command):
+    conn = SSHConnection(ip, 22)
     if conn.exec_command(command):
         return 1
     else:
         return 0
+
 
 if __name__ == "__main__":
     conn = SSHConnection('192.168.164.41', 22)
