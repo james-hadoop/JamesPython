@@ -7,11 +7,11 @@ def get_location_by_lat_lon(lat_lon):
     geolocator = Nominatim(user_agent="zcsd-application")
     location = geolocator.reverse(lat_lon)
 
-    print(location)
+    return str(location)
 
 
 def main():
-    get_location_by_lat_lon("22.5, 113.9")
+    print(get_location_by_lat_lon("26.6054, 106.6435"))
 
 
 if __name__ == '__main__':
