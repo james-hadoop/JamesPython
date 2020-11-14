@@ -6,15 +6,45 @@ import configobj
 import pymysql
 import json
 import os
-from time import time
+import base64
 
 import sqlparse
 
 from py_kd_data_common_proj.ds_utils.ds_pymysql_util import fetch_all, execute_sql
 
-
-config_path = os.getcwd() + '/../james_config/tct_dc_config.conf'
+config_path = os.getcwd() + '/../james_config/james_config.conf'
 CO = configobj.ConfigObj(config_path)
+
+
+def write_to_table(DB_COR, DB_CONN, full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table,
+                   update_time, sql_format, hive_lineage_log_id, ext):
+    update_name = 'jamesqjiang'
+    value = 'i am a value@' + update_time
+    ext = '{}'
+
+    """
+        INSERT INTO txkd_dc_hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, sql_format, hive_lineage_log_id, ext) VALUES ('', '', '', '', '', '', '', '', '', '', '');
+
+    """
+
+    convert_rel = rel.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_full_src_field = full_src_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
+                                                                                                                "TOK_COMMA")
+    convert_full_des_field = full_des_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",",
+                                                                                                                "TOK_COMMA")
+    convert_src_field = src_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+    convert_des_field = des_field.replace("'", "TOK_SINGLE_QUOTE").replace("$", "TOK_DOLLAR").replace(",", "TOK_COMMA")
+
+    sql_insert = "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" % (
+        convert_full_src_field, convert_full_des_field,
+        convert_rel, convert_src_field,
+        convert_des_field, src_table, des_table,
+        update_time, sql_format, hive_lineage_log_id, ext)
+
+    print(
+        f"----------------------------\nrel={convert_rel} \n\nfull_src_field={convert_full_src_field} \n\nfull_des_field={convert_full_des_field}")
+    execute_sql(DB_COR, DB_CONN,
+                "INSERT INTO txkd_dc_hive_lineage_rel (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, sql_format, hive_lineage_log_id, ext) VALUES (%s)" % sql_insert)
 
 
 def replaceWord(str):
@@ -24,17 +54,13 @@ def replaceWord(str):
 
 
 def read_from_table(DB_COR, lineage_id=246):
-    sql_select = "SELECT lineage_str FROM developer.txkd_dc_hive_lineage_log_daily where ftime=20200817 and id=%s;" % lineage_id
+    sql_select = "SELECT lineage_str FROM developer.txkd_dc_hive_lineage_log where id=%s;" % lineage_id
     results = fetch_all(DB_COR,
                         sql_select)
     return results
 
 
 def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_CONN):
-    print(f"hive_lineage_log_id={hive_lineage_log_id}")
-    print(lineage)
-    print("-" * 160)
-
     clean_lineage = " ".join(lineage.split())
 
     data_dict = json.loads(clean_lineage)
@@ -64,6 +90,7 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
 
     edges = data_dict["edges"]
 
+
     for elem in edges:
         sources = elem["sources"]
 
@@ -77,8 +104,7 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
 
         ## TODO
         if "expression" in elem:
-            # expression = base64.decodebytes(elem["expression"].encode()).decode('utf-8')
-            expression = elem["expression"]
+            expression = base64.decodebytes(elem["expression"].encode()).decode('utf-8')
         else:
             expression = "NONE_TRANSFORM"
 
@@ -114,16 +140,10 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
                     # sql_base64_encode = replaceWord(str(base64.encodebytes(sql_format.encode())))
                     # print(f"sql_base64_encode=\t{sql_base64_encode}")
 
-                    print("-" * 160)
-                    print(f"dest_column_name={dest_column_name}")
-                    print("-" * 160)
                     (full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time,
                      sql_format, hive_lineage_log_id, ext) = (origin_column_name, dest_column_name, expression,
                                                               origin_column_name.rsplit('.', 1)[1],
-                                                              dest_column_name.rsplit('.', 1)[
-                                                                  1] if dest_column_name.__contains__(
-                                                                  ".") else dest_column_name,
-
+                                                              dest_column_name.rsplit('.', 1)[1],
                                                               origin_column_name.rsplit('.', 1)[0],
                                                               dest_column_name.rsplit('.', 1)[0],
                                                               update_time, sql_format, id, '')
@@ -142,17 +162,17 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
 
                     insert_records.append(sql_record)
                     # print('*' * 160)
-                    # print(insert_records)SELECT count(1) cnt
-                    # FROM txkd_dc_hive_lineage_rel_prod_daily
-                    # WHERE locate(".", full_des_field)>0;
+                    # print(insert_records)
                     # print("\n")
 
-    if insert_records and len(insert_records) > 0:
+    if insert_records and len(insert_records)>0:
         DB_COR.executemany(
             "insert into txkd_dc_hive_lineage_rel(full_src_field, full_des_field, rel, src_field, des_field, src_table, des_table, update_time, sql_format, hive_lineage_log_id, ext) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
             insert_records)
 
         DB_CONN.commit()
+
+
         insert_records.clear()
 
 
@@ -169,9 +189,9 @@ def main():
                               charset='utf8')
 
     # # 解析单条点边关系
-    # lineage_id = 1664
-    # DB_COR = DB_CONN.cursor()
+    # lineage_id = 246
     # results = read_from_table(DB_COR, lineage_id)
+    # lineage = str(results[0][0]).replace("\\n", "TOK_BACKSLASH_N").replace("\\r", "TOK_BACKSLASH_R")
     # lineage = str(results[0][0])
     # print(f"{lineage}")
     # print('-' * 160)
@@ -180,13 +200,11 @@ def main():
 
     ### 批量解析
     # for lineage_id in range(1, 23):
-    for lineage_id in range(1, 13313):
+    for lineage_id in range(1059, 2782):
         print(f"lineage_id={lineage_id}")
 
         DB_COR = DB_CONN.cursor()
         results = read_from_table(DB_COR, lineage_id)
-        print(results)
-
         lineage = results[0][0]
         # print(f"{lineage}")
         # print('-'*160)
@@ -196,7 +214,4 @@ def main():
 
 
 if __name__ == '__main__':
-    start = time()
     main()
-    stop = time()
-    print(str(stop - start) + "秒")

@@ -52,6 +52,7 @@ def write_to_table(DB_COR, DB_CONN, full_src_field, full_des_field, rel, src_fie
 
 def read_from_table(DB_COR, lineage_id=246):
     sql_select = "SELECT lineage_str FROM developer.txkd_dc_hive_lineage_log_daily where ftime=20200813 and id=%s;" % lineage_id
+
     results = fetch_all(DB_COR,
                         sql_select)
     return results
@@ -219,6 +220,7 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
                     # print(f"{sql_base64_encode}")
 
                     origin_column_name = origin_column_name.replace("'", "TOK_SINGLE_QUOTE").replace("$",
+
                                                                                                      "TOK_DOLLAR").replace(
                         ",", "TOK_COMMA")
                     dest_column_name = dest_column_name.replace("'", "TOK_SINGLE_QUOTE").replace("$",
@@ -229,6 +231,7 @@ def process_txkd_dc_hive_lineage_info(lineage, hive_lineage_log_id, DB_COR, DB_C
                         ",", "TOK_COMMA")
                     sql_format = str(sql_format).replace("'", "TOK_SINGLE_QUOTE").replace("$",
                                                                                           "TOK_DOLLAR").replace(
+
                         ",", "TOK_COMMA")
 
                     print(f"origin_column_name={origin_column_name}")
@@ -255,7 +258,7 @@ def main():
                               charset='utf8')
 
     DB_COR = DB_CONN.cursor()
-
+    
     # 解析单条点边关系
     lineage_id = 246
     results = read_from_table(DB_COR, lineage_id)
@@ -274,6 +277,7 @@ def main():
     #     # print(f"{lineage}")
     #     # print('-'*160)
     #     process_txkd_dc_hive_lineage_info(lineage, lineage_id, DB_COR, DB_CONN)
+
 
 
 if __name__ == '__main__':

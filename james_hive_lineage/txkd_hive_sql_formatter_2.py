@@ -34,6 +34,19 @@ def write_to_table(DB_COR, DB_CONN, sql_str, is_valid):
                 "INSERT INTO txkd_dc_hive_sql_validate (sql_str, is_valid) VALUES (%s, %d)" % sql_insert)
 
 
+def validate_sql():
+    results = read_from_table(DB_COR)
+
+    sql_list = [[item[0]] for item in results]
+    for s in sql_list:
+        sql = str(s[0]).replace("TOK_SINGLE_QUOTE", "'").replace("TOK_BACKSLASH_N", " ").replace("::", ".").replace(
+            "INSERT OVERWRITE TABLE", "INSERT INTO").replace("INSERT TABLE", "INSERT INTO") + ";"
+        sql_format = sqlparse.format(sql, reindent=True, keyword_case='upper')
+        print(" ".join(sql_format.split()))
+
+    pass
+
+
 # 为date_sub()函数增加单引号
 def add_quote_on_date_for_DATE_SUB(sql):
     rs = re.findall(r'''date_sub(\(\s*([0-9]{8})\s*\,)''', sql)
