@@ -17,8 +17,8 @@ from py_kd_data_common_proj.ds_utils.ds_pymysql_util import fetch_all, execute_s
 
 
 def read_from_table(DB_COR):
-    sql_select = "SELECT sql_str, dbname FROM developer.txkd_dc_hive_sql_focus limit 2"
-    sql_select = "SELECT sql_str, dbname FROM developer.txkd_dc_hive_sql_focus"
+    sql_select = "SELECT sql_str, dbname FROM developer.txkd_dc_hive_sql_focus_all limit 2"
+    sql_select = "SELECT sql_str, dbname FROM developer.txkd_dc_hive_sql_focus_all"
     results = fetch_all(DB_COR,
                         sql_select)
     return results
@@ -72,7 +72,7 @@ def mysql2sql(sql):
                                                                                                                "`type`").replace(
         "interval", "`interval`").replace("INSERT OVERWRITE INTO TABLE", "INSERT INTO").replace("INSERT INTO TABLE",
                                                                                                 "INSERT INTO").replace(
-        ") GROUP BY", ") t_james_temp GROUP BY")
+        ") GROUP BY", ") t_alias_tt GROUP BY")
 
 
 def sql2mysql(sql):
@@ -84,7 +84,7 @@ def solve_less_alias_problem(sql):
     rs = re.findall(r'''(\)\)\s{1,5}(\w{1,20}))\s{1,5}ON''', sql)
     if rs is not None:
         for t in rs:
-            sql = sql.replace(t[0], ') t_james_temp) ' + t[1])
+            sql = sql.replace(t[0], ') t_alias_tt) ' + t[1])
     return sql
 
 
@@ -107,7 +107,7 @@ def validate_sql():
 
     sql_list = [[item[0], item[1]] for item in results]
 
-    with open("/Users/qjiang/workspace4py/JamesPython/james_hive_lineage/_log/txkd_hive_sql_formatter_2.sql",
+    with open("/Users/qjiang/workspace4py/JamesPython/james_hive_lineage/_log/txkd_dc_sql_60_big.sql",
               "a+") as f:
         for s in sql_list:
             db = s[1]

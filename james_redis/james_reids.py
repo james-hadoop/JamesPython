@@ -15,6 +15,10 @@ client.set("hello", "world")
 client.get("hello")
 # 输出结果: 1
 client.incr("counter")
+
+print(">>>")
+print(client.get("get_all_field_rel"))
+
 # 2.hash
 client.hset("myhash", "f1", "v1")
 client.hset("myhash", "f2", "v2")
