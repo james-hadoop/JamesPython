@@ -3,7 +3,7 @@ import pymysql
 
 from py_kd_data_common_proj.ds_utils.ds_pymysql_util import fetch_all
 
-pg_conn = psycopg2.connect(database="zcsd", user="postgres", password="Zcsd2020", host="101.132.165.74", port="5432")
+pg_conn = psycopg2.connect(database="zcsd", user="developer", password="developer", host="localhost", port="5432")
 pg_cur = pg_conn.cursor()
 
 my_conn = pymysql.connect(host="localhost", user="developer", passwd="developer",

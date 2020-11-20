@@ -11,8 +11,8 @@ def main():
 
     df = pd.DataFrame(arr)
     print(df)
-    print('-'*160)
-    print(df.describe())
+    # print('-'*160)
+    # print(df.describe())
 
 
 if __name__ == '__main__':
