@@ -1,0 +1,75 @@
+SHOW rowcount EXTENDED t_james_t_lsa_article_merge_hourly_20201101;
+
+
+ALTER TABLE t_lsa_article_center_hbase_incremental_sync_hourly ADD partition p_2020111500
+VALUES LESS THAN (2020111501);
+
+
+ALTER TABLE t_lsa_article_center_hbase_incremental_sync_hourly ADD partition p_2020111502
+VALUES LESS THAN (2020111503);
+
+SHOW rowcount EXTENDED t_lsa_article_center_hbase_incremental_sync_hourly;
+
+
+INSERT TABLE t_lsa_article_center_hbase_incremental_sync_hourly
+SELECT 2020111500 AS f_date,
+       rowkey,
+       ex_id,
+       puin,
+       puin_name,
+       title,
+       st_kd,
+       st_kd_last_updated_ts,
+       input_ts,
+       url,
+       src,
+       sub_src,
+       teg_chann,
+       teg_sec_chann,
+       kd_tag,
+       teg_tag,
+       st_sync,
+       chann_type,
+       material_article_type,
+       simkey,
+       st_sync_last_updated_ts,
+       kd_chann,
+       kd_sec_chann,
+       st_kd_high_quality,
+       kd_good_subsribe,
+       del_id,
+       st_evaluate,
+       st_insearch,
+       teg_chann_id,
+       teg_chann_name,
+       asn_pop_result,
+       union_media_score,
+       union_media_id,
+       content_quality_score,
+       media_id,
+       cid,
+       allowrecommend,
+       allowrecommend_bts,
+       allowrecommend_ets,
+       single_cover,
+       single_cover_url,
+       big_cover_url,
+       multi_cover_url,
+       has_qeh_src,
+       has_kuaibao_src,
+       has_browser_src,
+       union_chann,
+       union_tag,
+       auth,
+       media_name,
+       overall_level,
+       content_overall_level,
+       nlp_union_chann_id,
+       nlp_union_sec_chann_id,
+       nlp_union_trd_chann_id,
+       cc_eng_content_ar_is_recommend_result,
+       cc_eng_content_ar_is_valid_result,
+       expire_time,
+       st_browser_recommend
+FROM t_james_t_lsa_article_merge_hourly_20201101
+WHERE f_date=20201115;
