@@ -11,7 +11,7 @@ pd.set_option('display.max_rows', None)
 
 df = pd.read_csv('../_data/20191027/content_20191027_top200.csv')
 
-df = df[df.puin.isin(['1001000037396'])]
+# df = df[df.puin.isin(['1001000037396'])]
 
 data = df[['s_input_date', 'week_of_year', 'input_week_day', 'cnt']]
 data = data[data['week_of_year'] > 35]

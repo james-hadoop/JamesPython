@@ -38,7 +38,7 @@ fig = plt.figure(figsize=(10, 6))
 colors = ['deepskyblue', 'blueviolet', 'peru', 'brown', 'black', 'red', 'gold', 'darkorange']
 i = 0
 
-df = pd.read_csv('/Users/qjiang/workspace4python/JamesPython/_data/article_ruku_20200301.csv')
+df = pd.read_csv('/Users/qian.jiang/workspace4py/JamesPython/_data/article_ruku_20200301.csv')
 data = df[df['s_cont_stat_date'] > '2019-01-23']
 dataWeek = data.copy()
 
@@ -73,15 +73,15 @@ for dim in dims_union_chann_id:
     plt.plot(subset['s_cont_stat_date'], subset['today_ruku_cont_cnt'], c=colors[i], label=dim)
     i += 1
 
-    subsetWeek = dataWeek[dataWeek.union_chann_id.isin([dim])]
-    subsetWeek = subsetWeek.sort_values(axis=0, by=['s_cont_stat_date', 'union_chann_id'], ascending=True)
-    print('-' * 60)
-    cnt_zscore_week = zscore(subsetWeek['today_ruku_cont_cnt'])
-    subsetWeek['cnt_zscore'] = cnt_zscore_week
-    print(subsetWeek)
-    print('')
-    plt.plot(subsetWeek['s_cont_stat_date'], subsetWeek['today_ruku_cont_cnt'], c=colors[i], label=dim)
-    i += 1
+    # subsetWeek = dataWeek[dataWeek.union_chann_id.isin([dim])]
+    # subsetWeek = subsetWeek.sort_values(axis=0, by=['s_cont_stat_date', 'union_chann_id'], ascending=True)
+    # print('-' * 60)
+    # cnt_zscore_week = zscore(subsetWeek['today_ruku_cont_cnt'])
+    # subsetWeek['cnt_zscore'] = cnt_zscore_week
+    # print(subsetWeek)
+    # print('')
+    # plt.plot(subsetWeek['s_cont_stat_date'], subsetWeek['today_ruku_cont_cnt'], c=colors[i], label=dim)
+    # i += 1
 
 plt.legend(loc='upper left')
 plt.title(TITLE)

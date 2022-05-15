@@ -1,15 +1,15 @@
-def initLogConfig(logging, full_log_path, log_level='INFO'):
+def init_log_config(logging, full_log_path, log_level='INFO'):
     if not full_log_path or str(full_log_path).__len__() < 1:
         raise Exception
 
-    print("full_log_path=%s" % full_log_path)
+    # print("full_log_path=%s" % full_log_path)
     logging.basicConfig(filename=full_log_path,
                         level=log_level,
                         format='%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)8s: %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
 
 
-def initPandasSetting(pd):
+def init_pandas_setting(pd):
     pd.set_option('display.max_columns', 1000)
 
     pd.set_option('display.width', 1000)
@@ -17,3 +17,11 @@ def initPandasSetting(pd):
     pd.set_option('display.max_colwidth', 1000)
 
     pd.set_option('display.max_rows', None)
+
+
+def init_plot_setting(plt):
+    fig = plt.figure(figsize=(10, 6))
+    colors = ['deepskyblue', 'blueviolet', 'peru', 'brown', 'black', 'red', 'gold', 'darkorange']
+
+
+

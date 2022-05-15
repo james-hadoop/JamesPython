@@ -2,14 +2,14 @@
 import datetime
 import os
 
-from ds_utils import ds_date_util
+from py_kd_data_common_proj.ds_utils import ds_date_util
 
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import zscore
 import logging as log
 
-from ds_utils.ds_common_util import initLogConfig, initPandasSetting
+from py_kd_data_common_proj.ds_utils.ds_common_util import init_log_config, init_pandas_setting
 
 
 def main():
@@ -41,7 +41,7 @@ def main():
     i = 0
 
     df = pd.read_csv(
-        'data/article_ruku_20200301.csv')
+        '/Users/qian.jiang/workspace4py/JamesPython/_data/article_ruku_20200301.csv')
     data = df[df['s_cont_stat_date'] > '2019-01-23']
     # 深copy
     dataWeek = data.copy()
@@ -99,15 +99,16 @@ def main():
 
 if __name__ == '__main__':
     # 初始化pandas设置
-    initPandasSetting(pd)
+    init_pandas_setting(pd)
 
     print(os.getcwd())
     LOG_FILE = os.path.basename(__file__).split('.')[0]
-    LOG_TIME = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    LOG_TIME = datetime.datetime.now().strftime("%Y%m%dT%H%M%S")
     FULL_LOG_PATH = os.getcwd() + '/logs/' + LOG_FILE + LOG_TIME + '.log'
+    print(f"FULL_LOG_PATH={FULL_LOG_PATH}")
 
     # 初始化日志打点设置
-    initLogConfig(log, FULL_LOG_PATH, log_level=log.INFO)
+    init_log_config(log, FULL_LOG_PATH, log_level=log.INFO)
 
     # 业务逻辑
     main()
