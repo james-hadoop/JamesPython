@@ -28,6 +28,7 @@ def make_stat_week_day_str_list(stat_date, plus_minus, offset, count):
 
     return statWeekDayList
 
+
 def make_stat_week_day_list(stat_date, plus_minus, offset, count, date_format='%Y-%m-%d'):
     statWeekDayList = []
     sevenDayTimeOffset = timedelta(days=offset)
