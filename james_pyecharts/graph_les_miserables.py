@@ -3,21 +3,24 @@ import json
 from pyecharts import options as opts
 from pyecharts.charts import Graph
 
+json_file = "les-miserables.json"
+json_file = "dataworks_1.json"
 
-with open("les-miserables.json", "r", encoding="utf-8") as f:
+with open(json_file, "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes = j["nodes"]
     links = j["links"]
     categories = j["categories"]
 
 c = (
-    Graph(init_opts=opts.InitOpts(width="1000px", height="600px"))
+    Graph(init_opts=opts.InitOpts(width="1920px", height="1080px"))
     .add(
         "",
         nodes=nodes,
         links=links,
         categories=categories,
-        layout="circular",
+        type="graph",
+        layout="none",
         is_rotate_label=True,
         linestyle_opts=opts.LineStyleOpts(color="source", curve=0.3),
         label_opts=opts.LabelOpts(position="right"),

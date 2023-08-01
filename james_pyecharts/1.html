@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+<div id="ccdc86ef8df84589bf6db353823e657c" class="chart-container" style="width:1920px; height:1080px;"></div>
+<script>
+    var chart_ccdc86ef8df84589bf6db353823e657c = echarts.init(
+        document.getElementById('ccdc86ef8df84589bf6db353823e657c'), 'white', {renderer: 'canvas'});
+    var option_ccdc86ef8df84589bf6db353823e657c = {
+        "animation": true,
+        "animationThreshold": 2000,
+        "animationDuration": 1000,
+        "animationEasing": "cubicOut",
+        "animationDelay": 0,
+        "animationDurationUpdate": 300,
+        "animationEasingUpdate": "cubicOut",
+        "animationDelayUpdate": 0,
+        "color": [
+            "#c23531",
+            "#2f4554",
+            "#61a0a8",
+            "#d48265",
+            "#749f83",
+            "#ca8622",
+            "#bda29a",
+            "#6e7074",
+            "#546570",
+            "#c4ccd3",
+            "#f05b72",
+            "#ef5b9c",
+            "#f47920",
+            "#905a3d",
+            "#fab27b",
+            "#2a5caa",
+            "#444693",
+            "#726930",
+            "#b2d235",
+            "#6d8346",
+            "#ac6767",
+            "#1d953f",
+            "#6950a1",
+            "#918597"
+        ],
+        "series": [
+            {
+                "type": "graph",
+                "layout": "circular",
+                "symbolSize": 10,
+                "circular": {
+                    "rotateLabel": true
+                },
+                "force": {
+                    "repulsion": 50,
+                    "edgeLength": 50,
+                    "gravity": 0.2
+                },
+                "label": {
+                    "show": true,
+                    "position": "right",
+                    "margin": 8
+                },
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0.3,
+                    "type": "solid",
+                    "color": "source"
+                },
+                "roam": true,
+                "draggable": false,
+                "focusNodeAdjacency": true,
+                "data": [
+                    {
+                        "id": "210001294497",
+                        "name": "dm_mkt_qm_30_days_new_user_7_days_behavior_inc_d.sh",
+                        "symbolSize": 10,
+                        "x": 0,
+                        "y": 0,
+                        "value": 10,
+                        "category": 0
+                    },
+                    {
+                        "id": "210001294494",
+                        "name": "dwt_user_qm_user_read_active_inc_d.sh",
+                        "symbolSize": 10,
+                        "x": 0,
+                        "y": 0,
+                        "value": 10,
+                        "category": 1
+                    }
+                ],
+                "categories": [
+                    {
+                        "name": "ods"
+                    },
+                    {
+                        "name": "dwd"
+                    },
+                    {
+                        "name": "dwm"
+                    },
+                    {
+                        "name": "dwt"
+                    },
+                    {
+                        "name": "dm"
+                    },
+                    {
+                        "name": "dim"
+                    },
+                    {
+                        "name": "other"
+                    }
+                ],
+                "edgeLabel": {
+                    "show": false,
+                    "position": "top",
+                    "margin": 8
+                },
+                "edgeSymbol": [
+                    null,
+                    null
+                ],
+                "edgeSymbolSize": 10,
+                "links": [
+                    {
+                        "source": "210001294497",
+                        "target": "210001294494"
+                    },
+                    {
+                        "source": "210001294494",
+                        "target": "210001294485"
+                    },
+                    {
+                        "source": "210001294494",
+                        "target": "210001317660"
+                    }
+                ]
+            }
+        ],
+        "legend": [
+            {
+                "data": [
+                    "ods",
+                    "dwd",
+                    "dwm",
+                    "dwt",
+                    "dm",
+                    "dim",
+                    "other"
+                ],
+                "selected": {
+                    "ods": true,
+                    "dwd": true,
+                    "dwm": true,
+                    "dwt": true,
+                    "dm": true,
+                    "dim": true,
+                    "other": true
+                },
+                "show": true,
+                "left": "2%",
+                "top": "20%",
+                "orient": "vertical",
+                "padding": 5,
+                "itemGap": 10,
+                "itemWidth": 25,
+                "itemHeight": 14
+            }
+        ],
+        "tooltip": {
+            "show": true,
+            "trigger": "item",
+            "triggerOn": "mousemove|click",
+            "axisPointer": {
+                "type": "line"
+            },
+            "showContent": true,
+            "alwaysShowContent": false,
+            "showDelay": 0,
+            "hideDelay": 100,
+            "textStyle": {
+                "fontSize": 14
+            },
+            "borderWidth": 0,
+            "padding": 5
+        },
+        "title": [
+            {
+                "text": "Graph-Les Miserables",
+                "padding": 5,
+                "itemGap": 10
+            }
+        ]
+    };
+    chart_ccdc86ef8df84589bf6db353823e657c.setOption(option_ccdc86ef8df84589bf6db353823e657c);
+</script>
+</body>
+</html>

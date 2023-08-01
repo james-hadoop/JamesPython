@@ -29,7 +29,7 @@ links_data = [
 ]
 c = (
     Graph(init_opts=opts.InitOpts(width="1800px", height="1600px"))
-        .add(
+    .add(
         "",
         nodes_data,
         links_data,
@@ -38,8 +38,7 @@ c = (
             is_show=True, position="middle", formatter="{b} -> {c}"
         )
     )
-        .set_global_opts(
+    .set_global_opts(
         title_opts=opts.TitleOpts(title="Graph-GraphNode-GraphLink-WithEdgeLabel")
-    )
-        .render("graph_with_edge_options.html")
+    ).render("graph_with_edge_options.html")
 )

@@ -1,0 +1,713 @@
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "pageData": {
+      "count": "150",
+      "page": "1",
+      "pageSize": "100"
+    },
+    "list": [
+      {
+        "tableName": "dwd_ab_client_trace_log",
+        "tableId": "18753",
+        "partitionCount": "492",
+        "storageSize": "10.86T",
+        "lastUpdateTime": "2022-09-14 03:29:28"
+      },
+      {
+        "tableName": "dwd_ab_experiment_info",
+        "tableId": "18754",
+        "partitionCount": "492",
+        "storageSize": "2.71T",
+        "lastUpdateTime": "2022-09-14 03:39:42"
+      },
+      {
+        "tableName": "dwd_ab_server_sdk_log",
+        "tableId": "12569",
+        "partitionCount": "492",
+        "storageSize": "913.67G",
+        "lastUpdateTime": "2022-09-14 03:03:33"
+      },
+      {
+        "tableName": "dwd_booklist_comment_data",
+        "tableId": "18065",
+        "partitionCount": "332",
+        "storageSize": "98.82M",
+        "lastUpdateTime": "2022-09-14 01:12:16"
+      },
+      {
+        "tableName": "dwd_fast_adv_ecpm",
+        "tableId": "27092",
+        "partitionCount": "130",
+        "storageSize": "195.26K",
+        "lastUpdateTime": "2022-09-14 01:01:21"
+      },
+      {
+        "tableName": "dwd_fast_aggs_log",
+        "tableId": "27171",
+        "partitionCount": "437",
+        "storageSize": "2.02T",
+        "lastUpdateTime": "2022-09-14 00:35:17"
+      },
+      {
+        "tableName": "dwd_fast_apply_cash_record",
+        "tableId": "28229",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-09-14 08:03:33"
+      },
+      {
+        "tableName": "dwd_fast_author_book_merge",
+        "tableId": "29403",
+        "partitionCount": "128",
+        "storageSize": "48.21K",
+        "lastUpdateTime": "2022-09-14 00:40:40"
+      },
+      {
+        "tableName": "dwd_fast_book_cold_support_testing",
+        "tableId": "46303",
+        "partitionCount": "1",
+        "storageSize": "2.08K",
+        "lastUpdateTime": "2022-09-14 09:02:25"
+      },
+      {
+        "tableName": "dwd_fast_book_read_first_chapter",
+        "tableId": "26617",
+        "partitionCount": "145",
+        "storageSize": "1.94G",
+        "lastUpdateTime": "2022-09-14 01:31:10"
+      },
+      {
+        "tableName": "dwd_fast_book_statistics_book_android",
+        "tableId": "29076",
+        "partitionCount": "1",
+        "storageSize": "84.83K",
+        "lastUpdateTime": "2022-05-06 11:06:01"
+      },
+      {
+        "tableName": "dwd_fast_devs_log",
+        "tableId": "26611",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-09-14 01:11:49"
+      },
+      {
+        "tableName": "dwd_fast_dim_book",
+        "tableId": "26541",
+        "partitionCount": "159",
+        "storageSize": "2.15G",
+        "lastUpdateTime": "2022-09-14 01:31:30"
+      },
+      {
+        "tableName": "dwd_fast_dim_book_chapter",
+        "tableId": "26612",
+        "partitionCount": "150",
+        "storageSize": "171.43G",
+        "lastUpdateTime": "2022-09-14 01:12:41"
+      },
+      {
+        "tableName": "dwd_fast_dmp_click_record",
+        "tableId": "27021",
+        "partitionCount": "147",
+        "storageSize": "152.71G",
+        "lastUpdateTime": "2022-09-14 00:36:14"
+      },
+      {
+        "tableName": "dwd_fast_dmp_koc_log",
+        "tableId": "27022",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-09-14 01:31:56"
+      },
+      {
+        "tableName": "dwd_fast_dmp_media_callback",
+        "tableId": "27023",
+        "partitionCount": "149",
+        "storageSize": "1.80G",
+        "lastUpdateTime": "2022-09-14 00:22:50"
+      },
+      {
+        "tableName": "dwd_fast_dmp_push_click",
+        "tableId": "27024",
+        "partitionCount": "148",
+        "storageSize": "150.81G",
+        "lastUpdateTime": "2022-09-14 00:33:49"
+      },
+      {
+        "tableName": "dwd_fast_events_log",
+        "tableId": "26862",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-04-11 16:30:28"
+      },
+      {
+        "tableName": "dwd_fast_feed_back_list",
+        "tableId": "29405",
+        "partitionCount": "8",
+        "storageSize": "947.44K",
+        "lastUpdateTime": "2022-09-14 01:02:06"
+      },
+      {
+        "tableName": "dwd_fast_launchs_log",
+        "tableId": "26600",
+        "partitionCount": "145",
+        "storageSize": "232.34G",
+        "lastUpdateTime": "2022-09-14 01:03:55"
+      },
+      {
+        "tableName": "dwd_fast_public_log",
+        "tableId": "26599",
+        "partitionCount": "146",
+        "storageSize": "332.32G",
+        "lastUpdateTime": "2022-09-14 01:04:57"
+      },
+      {
+        "tableName": "dwd_fast_pull_live_public_log",
+        "tableId": "27025",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-09-14 00:17:40"
+      },
+      {
+        "tableName": "dwd_fast_quota_comment_audit",
+        "tableId": "27445",
+        "partitionCount": "143",
+        "storageSize": "27.16M",
+        "lastUpdateTime": "2022-09-14 00:07:06"
+      },
+      {
+        "tableName": "dwd_fast_quota_new_statistics_coin_type",
+        "tableId": "27449",
+        "partitionCount": "142",
+        "storageSize": "13.29M",
+        "lastUpdateTime": "2022-09-14 07:16:11"
+      },
+      {
+        "tableName": "dwd_fast_quota_new_statistics_withdraw",
+        "tableId": "27450",
+        "partitionCount": "143",
+        "storageSize": "2.21M",
+        "lastUpdateTime": "2022-09-14 07:16:06"
+      },
+      {
+        "tableName": "dwd_fast_quota_reader_statistic_data",
+        "tableId": "27451",
+        "partitionCount": "143",
+        "storageSize": "1.22M",
+        "lastUpdateTime": "2022-09-14 08:12:46"
+      },
+      {
+        "tableName": "dwd_fast_quota_reg_channel_situation",
+        "tableId": "27452",
+        "partitionCount": "142",
+        "storageSize": "831.27K",
+        "lastUpdateTime": "2022-09-14 07:15:57"
+      },
+      {
+        "tableName": "dwd_fast_quota_reward_order",
+        "tableId": "27188",
+        "partitionCount": "143",
+        "storageSize": "2.58M",
+        "lastUpdateTime": "2022-09-14 00:06:59"
+      },
+      {
+        "tableName": "dwd_fast_quota_sign_log",
+        "tableId": "27453",
+        "partitionCount": "142",
+        "storageSize": "95.05M",
+        "lastUpdateTime": "2022-09-14 06:28:54"
+      },
+      {
+        "tableName": "dwd_fast_quota_user_order_record",
+        "tableId": "27454",
+        "partitionCount": "144",
+        "storageSize": "127.27M",
+        "lastUpdateTime": "2022-09-14 07:16:04"
+      },
+      {
+        "tableName": "dwd_fast_quota_user_sign_aggregation_data",
+        "tableId": "27455",
+        "partitionCount": "142",
+        "storageSize": "246.55K",
+        "lastUpdateTime": "2022-09-14 06:29:59"
+      },
+      {
+        "tableName": "dwd_fast_rec_show_click_log",
+        "tableId": "26531",
+        "partitionCount": "152",
+        "storageSize": "50.99G",
+        "lastUpdateTime": "2022-09-14 01:32:29"
+      },
+      {
+        "tableName": "dwd_fast_task_once_over_record",
+        "tableId": "28227",
+        "partitionCount": "133",
+        "storageSize": "1.10G",
+        "lastUpdateTime": "2022-09-14 08:02:48"
+      },
+      {
+        "tableName": "dwd_fast_user",
+        "tableId": "27159",
+        "partitionCount": "143",
+        "storageSize": "13.40G",
+        "lastUpdateTime": "2022-09-14 00:35:56"
+      },
+      {
+        "tableName": "dwd_fast_user_author",
+        "tableId": "29393",
+        "partitionCount": "129",
+        "storageSize": "18.58M",
+        "lastUpdateTime": "2022-09-14 00:33:40"
+      },
+      {
+        "tableName": "dwd_fast_user_coin_detail",
+        "tableId": "28225",
+        "partitionCount": "133",
+        "storageSize": "995.02M",
+        "lastUpdateTime": "2022-09-14 08:02:09"
+      },
+      {
+        "tableName": "dwd_fast_user_coin_per_day_detail",
+        "tableId": "35882",
+        "partitionCount": "81",
+        "storageSize": "220.96M",
+        "lastUpdateTime": "2022-09-14 04:31:02"
+      },
+      {
+        "tableName": "dwd_fast_user_data",
+        "tableId": "28228",
+        "partitionCount": "133",
+        "storageSize": "11.04G",
+        "lastUpdateTime": "2022-09-14 08:03:32"
+      },
+      {
+        "tableName": "dwd_fast_user_fans",
+        "tableId": "29391",
+        "partitionCount": "129",
+        "storageSize": "8.26M",
+        "lastUpdateTime": "2022-09-14 00:31:51"
+      },
+      {
+        "tableName": "dwd_fast_user_follow",
+        "tableId": "29392",
+        "partitionCount": "129",
+        "storageSize": "8.26M",
+        "lastUpdateTime": "2022-09-14 00:31:54"
+      },
+      {
+        "tableName": "dwd_fast_user_old_device",
+        "tableId": "28226",
+        "partitionCount": "139",
+        "storageSize": "5.64G",
+        "lastUpdateTime": "2022-09-14 08:02:29"
+      },
+      {
+        "tableName": "dwd_fast_user_other_bind",
+        "tableId": "46558",
+        "partitionCount": "7",
+        "storageSize": "442.65M",
+        "lastUpdateTime": "2022-09-14 01:01:18"
+      },
+      {
+        "tableName": "dwd_fast_user_reg_info_extend",
+        "tableId": "27160",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-04-15 11:29:00"
+      },
+      {
+        "tableName": "dwd_fast_user_sign",
+        "tableId": "28100",
+        "partitionCount": "140",
+        "storageSize": "201.94G",
+        "lastUpdateTime": "2022-09-13 16:17:22"
+      },
+      {
+        "tableName": "dwd_fast_user_tourist",
+        "tableId": "28099",
+        "partitionCount": "142",
+        "storageSize": "38.36G",
+        "lastUpdateTime": "2022-09-14 00:12:43"
+      },
+      {
+        "tableName": "dwd_fast_user_vip_info",
+        "tableId": "27186",
+        "partitionCount": "143",
+        "storageSize": "3.77M",
+        "lastUpdateTime": "2022-09-14 00:11:04"
+      },
+      {
+        "tableName": "dwd_qm_account_bookshelf",
+        "tableId": "11400",
+        "partitionCount": "375",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-02-07 10:56:45"
+      },
+      {
+        "tableName": "dwd_qm_adv_click_report_record",
+        "tableId": "29089",
+        "partitionCount": "134",
+        "storageSize": "865.22G",
+        "lastUpdateTime": "2022-09-14 07:13:39"
+      },
+      {
+        "tableName": "dwd_qm_adv_ecpm",
+        "tableId": "9752",
+        "partitionCount": "774",
+        "storageSize": "9.54M",
+        "lastUpdateTime": "2022-09-13 23:50:32"
+      },
+      {
+        "tableName": "dwd_qm_adv_inside_aggs_log",
+        "tableId": "20790",
+        "partitionCount": "255",
+        "storageSize": "1.93T",
+        "lastUpdateTime": "2022-09-14 05:52:58"
+      },
+      {
+        "tableName": "dwd_qm_aggs_log",
+        "tableId": "28320",
+        "partitionCount": "531",
+        "storageSize": "39.75T",
+        "lastUpdateTime": "2022-09-14 00:42:49"
+      },
+      {
+        "tableName": "dwd_qm_aggs_log_history",
+        "tableId": "1488",
+        "partitionCount": "672",
+        "storageSize": "1002.05G",
+        "lastUpdateTime": "2022-04-27 15:26:26"
+      },
+      {
+        "tableName": "dwd_qm_author_book_merge",
+        "tableId": "20032",
+        "partitionCount": "276",
+        "storageSize": "239.17M",
+        "lastUpdateTime": "2022-09-14 01:08:41"
+      },
+      {
+        "tableName": "dwd_qm_book_exposure",
+        "tableId": "21013",
+        "partitionCount": "248",
+        "storageSize": "6.16M",
+        "lastUpdateTime": "2022-09-14 00:30:50"
+      },
+      {
+        "tableName": "dwd_qm_book_first_two_chapter",
+        "tableId": "1517",
+        "partitionCount": "76",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-03-28 17:16:48"
+      },
+      {
+        "tableName": "dwd_qm_book_push_returned_message",
+        "tableId": "33876",
+        "partitionCount": "96",
+        "storageSize": "810.40G",
+        "lastUpdateTime": "2022-09-14 01:37:40"
+      },
+      {
+        "tableName": "dwd_qm_book_push_returned_user_pull_detail",
+        "tableId": "43750",
+        "partitionCount": "96",
+        "storageSize": "711.04G",
+        "lastUpdateTime": "2022-09-14 13:31:10"
+      },
+      {
+        "tableName": "dwd_qm_book_read_first_chapter",
+        "tableId": "7986",
+        "partitionCount": "833",
+        "storageSize": "266.99G",
+        "lastUpdateTime": "2022-09-14 01:40:20"
+      },
+      {
+        "tableName": "dwd_qm_book_read_first_chapter_20201210",
+        "tableId": "7984",
+        "partitionCount": "190",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-03-28 17:27:36"
+      },
+      {
+        "tableName": "dwd_qm_book_statistics_book_android",
+        "tableId": "29077",
+        "partitionCount": "1",
+        "storageSize": "1.33M",
+        "lastUpdateTime": "2022-05-06 11:05:54"
+      },
+      {
+        "tableName": "dwd_qm_book_vip_order",
+        "tableId": "33442",
+        "partitionCount": "256",
+        "storageSize": "309.68M",
+        "lastUpdateTime": "2022-09-14 05:31:09"
+      },
+      {
+        "tableName": "dwd_qm_dataally_activated",
+        "tableId": "4767",
+        "partitionCount": "112",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-09-14 08:32:38"
+      },
+      {
+        "tableName": "dwd_qm_dataally_install",
+        "tableId": "1638",
+        "partitionCount": "824",
+        "storageSize": "210.72G",
+        "lastUpdateTime": "2022-09-14 01:09:10"
+      },
+      {
+        "tableName": "dwd_qm_dataally_unactivated",
+        "tableId": "4243",
+        "partitionCount": "100",
+        "storageSize": "47.97M",
+        "lastUpdateTime": "2022-09-14 08:32:39"
+      },
+      {
+        "tableName": "dwd_qm_dataally_uninstall",
+        "tableId": "1639",
+        "partitionCount": "832",
+        "storageSize": "8.44G",
+        "lastUpdateTime": "2022-09-14 09:02:08"
+      },
+      {
+        "tableName": "dwd_qm_devs_log",
+        "tableId": "1490",
+        "partitionCount": "837",
+        "storageSize": "314.35G",
+        "lastUpdateTime": "2022-09-14 01:16:17"
+      },
+      {
+        "tableName": "dwd_qm_dim_book",
+        "tableId": "13817",
+        "partitionCount": "835",
+        "storageSize": "15.14G",
+        "lastUpdateTime": "2022-09-14 01:06:33"
+      },
+      {
+        "tableName": "dwd_qm_dim_book_album_audios",
+        "tableId": "42743",
+        "partitionCount": "30",
+        "storageSize": "195.40M",
+        "lastUpdateTime": "2022-09-14 00:20:37"
+      },
+      {
+        "tableName": "dwd_qm_dim_book_albums",
+        "tableId": "42742",
+        "partitionCount": "30",
+        "storageSize": "8.37M",
+        "lastUpdateTime": "2022-09-14 00:21:04"
+      },
+      {
+        "tableName": "dwd_qm_dim_book_chapter",
+        "tableId": "2372",
+        "partitionCount": "839",
+        "storageSize": "1.01T",
+        "lastUpdateTime": "2022-09-14 00:56:51"
+      },
+      {
+        "tableName": "dwd_qm_dmp_click_record",
+        "tableId": "4795",
+        "partitionCount": "737",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "1970-01-01 08:00:00"
+      },
+      {
+        "tableName": "dwd_qm_dmp_koc_log",
+        "tableId": "15031",
+        "partitionCount": "410",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "1970-01-01 08:00:00"
+      },
+      {
+        "tableName": "dwd_qm_dmp_koc_text_section",
+        "tableId": "15450",
+        "partitionCount": "439",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "1970-01-01 08:00:00"
+      },
+      {
+        "tableName": "dwd_qm_dmp_media_callback",
+        "tableId": "4801",
+        "partitionCount": "738",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "1970-01-01 08:00:00"
+      },
+      {
+        "tableName": "dwd_qm_dmp_media_creative_data",
+        "tableId": "28128",
+        "partitionCount": "0",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-04-26 21:42:30"
+      },
+      {
+        "tableName": "dwd_qm_dmp_push_click",
+        "tableId": "4794",
+        "partitionCount": "737",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-01-05 10:25:28"
+      },
+      {
+        "tableName": "dwd_qm_events_log",
+        "tableId": "1489",
+        "partitionCount": "838",
+        "storageSize": "6.23T",
+        "lastUpdateTime": "2022-09-14 00:48:21"
+      },
+      {
+        "tableName": "dwd_qm_exposure_suppress_detail",
+        "tableId": "15828",
+        "partitionCount": "105",
+        "storageSize": "2.42T",
+        "lastUpdateTime": "2021-12-09 10:26:06"
+      },
+      {
+        "tableName": "dwd_qm_feed_back_list",
+        "tableId": "29406",
+        "partitionCount": "136",
+        "storageSize": "11.76G",
+        "lastUpdateTime": "2022-09-14 01:02:04"
+      },
+      {
+        "tableName": "dwd_qm_invalid_agg_log",
+        "tableId": "4460",
+        "partitionCount": "741",
+        "storageSize": "405.06G",
+        "lastUpdateTime": "2022-09-14 09:05:33"
+      },
+      {
+        "tableName": "dwd_qm_launchs_log",
+        "tableId": "1479",
+        "partitionCount": "841",
+        "storageSize": "3.99T",
+        "lastUpdateTime": "2022-09-14 12:14:21"
+      },
+      {
+        "tableName": "dwd_qm_non_ad_aggs_log",
+        "tableId": "24046",
+        "partitionCount": "404",
+        "storageSize": "164.78T",
+        "lastUpdateTime": "2022-09-14 01:32:06"
+      },
+      {
+        "tableName": "dwd_qm_public_log",
+        "tableId": "1478",
+        "partitionCount": "841",
+        "storageSize": "5.57T",
+        "lastUpdateTime": "2022-09-14 12:12:12"
+      },
+      {
+        "tableName": "dwd_qm_public_log_real_time",
+        "tableId": "4780",
+        "partitionCount": "310",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2021-06-23 13:53:12"
+      },
+      {
+        "tableName": "dwd_qm_pull_live_public_log",
+        "tableId": "11942",
+        "partitionCount": "512",
+        "storageSize": "16.76G",
+        "lastUpdateTime": "2022-09-14 02:46:16"
+      },
+      {
+        "tableName": "dwd_qm_reader_duration_log",
+        "tableId": "6978",
+        "partitionCount": "143",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "2022-03-30 18:56:55"
+      },
+      {
+        "tableName": "dwd_qm_rec_book_embedding",
+        "tableId": "20962",
+        "partitionCount": "198",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "1970-01-01 08:00:00"
+      },
+      {
+        "tableName": "dwd_qm_rec_book_relation",
+        "tableId": "20963",
+        "partitionCount": "198",
+        "storageSize": "0.00B",
+        "lastUpdateTime": "1970-01-01 08:00:00"
+      },
+      {
+        "tableName": "dwd_qm_rec_newuser_realtime_show_click_data",
+        "tableId": "27189",
+        "partitionCount": "166",
+        "storageSize": "1.68T",
+        "lastUpdateTime": "2022-09-14 00:32:07"
+      },
+      {
+        "tableName": "dwd_qm_rec_newuser_realtime_show_click_data_test",
+        "tableId": "32944",
+        "partitionCount": "2",
+        "storageSize": "10.96G",
+        "lastUpdateTime": "2022-06-13 09:37:04"
+      },
+      {
+        "tableName": "dwd_qm_rec_user_favorite_state",
+        "tableId": "31090",
+        "partitionCount": "43",
+        "storageSize": "246.61G",
+        "lastUpdateTime": "2022-06-13 01:12:53"
+      },
+      {
+        "tableName": "dwd_qm_rec_user_favorite_state_window",
+        "tableId": "33063",
+        "partitionCount": "178",
+        "storageSize": "1.06T",
+        "lastUpdateTime": "2022-09-14 01:33:56"
+      },
+      {
+        "tableName": "dwd_qm_rec_user_favorite_state_window_24",
+        "tableId": "35255",
+        "partitionCount": "121",
+        "storageSize": "734.37G",
+        "lastUpdateTime": "2022-07-25 01:22:24"
+      },
+      {
+        "tableName": "dwd_qm_reward_book_user_total",
+        "tableId": "23420",
+        "partitionCount": "256",
+        "storageSize": "14.99G",
+        "lastUpdateTime": "2022-09-14 00:22:29"
+      },
+      {
+        "tableName": "dwd_qm_user",
+        "tableId": "8553",
+        "partitionCount": "626",
+        "storageSize": "6.25T",
+        "lastUpdateTime": "2022-09-14 01:25:39"
+      },
+      {
+        "tableName": "dwd_qm_user_active_comment",
+        "tableId": "19813",
+        "partitionCount": "277",
+        "storageSize": "2.67T",
+        "lastUpdateTime": "2022-09-14 01:25:08"
+      },
+      {
+        "tableName": "dwd_qm_user_author",
+        "tableId": "20031",
+        "partitionCount": "276",
+        "storageSize": "1.70G",
+        "lastUpdateTime": "2022-09-14 00:15:35"
+      },
+      {
+        "tableName": "dwd_qm_user_book_read_listen_duration",
+        "tableId": "31318",
+        "partitionCount": "178",
+        "storageSize": "12.96T",
+        "lastUpdateTime": "2022-09-14 01:27:15"
+      },
+      {
+        "tableName": "dwd_qm_user_bookshelf",
+        "tableId": "8182",
+        "partitionCount": "313",
+        "storageSize": "5.65T",
+        "lastUpdateTime": "2022-09-13 15:15:45"
+      }
+    ]
+  }
+}

@@ -2,14 +2,14 @@
 import datetime
 import os
 
-from ds_utils import ds_date_util
+from py_kd_data_common_proj.ds_utils import ds_date_util
 
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import zscore
 import logging as log
 
-from ds_utils.ds_common_util import initLogConfig, initPandasSetting
+from py_kd_data_common_proj.ds_utils import init_pandas_setting, init_log_config
 
 
 def main():
@@ -99,15 +99,15 @@ def main():
 
 if __name__ == '__main__':
     # 初始化pandas设置
-    initPandasSetting(pd)
+    init_pandas_setting(pd)
 
     print(os.getcwd())
-    LOG_FILE = os.path.basename(__file__).split('.')[0]
-    LOG_TIME = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    FULL_LOG_PATH = os.getcwd() + '/logs/' + LOG_FILE + LOG_TIME + '.log'
+    log_file = os.path.basename(__file__).split('.')[0]
+    log_time = datetime.datetime.now().strftime("%Y-%m-%d__%H:%M:%S")
+    log_path = os.getcwd() + '/logs/' + log_file + '-' + log_time + '.log'
 
     # 初始化日志打点设置
-    initLogConfig(log, FULL_LOG_PATH, log_level=log.INFO)
+    init_log_config(log_handler=log, log_path=log_path, log_level=log.INFO)
 
     # 业务逻辑
     main()

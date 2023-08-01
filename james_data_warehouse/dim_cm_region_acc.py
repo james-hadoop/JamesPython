@@ -1,8 +1,5 @@
 import sys
-import datetime
-import calendar
 import pandas as pd
-import csv
 
 
 def parse_dim_cc_info():
@@ -47,7 +44,7 @@ def parse_dim_cc_info():
     df.insert(5, 'country', d)
 
     print(df)
-    df.to_csv(path_dst, header=True, index=False)
+    # df.to_csv(path_dst, header=True, index=False)
 
 
 def main():
