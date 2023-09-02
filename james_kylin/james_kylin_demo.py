@@ -6,7 +6,7 @@ import sys
 import pandas as pd
 import logging as log
 
-from py_kd_data_common_proj.ds_utils.ds_common_util import init_log_config, init_pandas_setting
+#from py_kd_data_common_proj.ds_utils.ds_common_util import init_log_config, init_pandas_setting
 
 
 def main():

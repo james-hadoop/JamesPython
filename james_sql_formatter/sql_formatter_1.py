@@ -1,8 +1,12 @@
-import re
+"""
+====================================================================
+Author: James Jiang
+====================================================================
+"""
 
 import sqlparse
 
-sql = """
+SQL = """
 INSERT INTO 
 
 kandian_ods_video_core_d 
@@ -11,7 +15,7 @@ kandian_ods_video_core_d
 
 """
 
-sql = """
+SQL = """
 INSERT INTO kandian_mid_video_cinfo_d  
     SELECT
         20200607 as ftime
@@ -355,11 +359,9 @@ INSERT INTO kandian_mid_video_cinfo_d
         ;
 """
 
-sql_format = sqlparse.format(sql, reindent=True, keyword_case='upper')
+FORMATTED_SQL = sqlparse.format(SQL, reindent=False, keyword_case='upper')
+print(FORMATTED_SQL)
 
-print(sql_format)
-sql_compact = ' '.join(sql_format.split())
-print("-" * 160)
-print(sql_compact)
-
-sqlparse.v
+COMPACTED_SQL = ''.join(FORMATTED_SQL.split())
+print("-" * 100)
+print(COMPACTED_SQL)

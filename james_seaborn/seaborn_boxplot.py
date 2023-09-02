@@ -10,10 +10,14 @@ pd.set_option('display.max_colwidth', 1000)
 
 pd.set_option('display.max_rows', None)
 
-df = pd.read_csv('../_data/account_top200.csv')
+data_file_folder = '/Users/jiangqian/Documents/_AllDocMap/02_Project/ws4python/'
+
+data_file_path = data_file_folder+f"JamesPython/_data/account_top200.csv"
+
+df = pd.read_csv(data_file_path)
 # print(df)
 
-df = df[df.puin.isin(['1781806734'])]
+# df = df[df.puin.isin(['1781806734'])]
 df = df[df['week_of_year'] > 33]
 df = df[df['week_of_year'] < 43]
 df = df.sort_values(axis=0, by=['week_of_year', 'input_week_day'], ascending=True)
