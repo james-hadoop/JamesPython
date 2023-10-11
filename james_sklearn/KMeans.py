@@ -1,7 +1,7 @@
-print(__doc__)
-
-# Author: Phil Roth <mr.phil.roth@gmail.com>
-# License: BSD 3 clause
+"""
+Author: Phil Roth <mr.phil.roth@gmail.com>
+License: BSD 3 clause
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
